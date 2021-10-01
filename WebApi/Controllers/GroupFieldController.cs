@@ -1,10 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using WebApi.Bussiness.Services;
-using WebApi.Data.Entites;
+using WebApi.Data.Repositories;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -14,22 +10,17 @@ namespace WebApi.Controllers
     [ApiController]
     public class GroupFieldController : ControllerBase
     {
-        private readonly IFieldGroupService _fieldGroupService;
-        public GroupFieldController(IFieldGroupService fieldGroupService)
+        private readonly IUnitOfWork _unitOfWork;
+
+        public GroupFieldController(IUnitOfWork unitOfWork)
         {
-            _fieldGroupService = fieldGroupService;
+            _unitOfWork = unitOfWork;
         }
         // GET: api/<GroupFieldController>
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var search = new Bussiness.DTO.GetGroupFieldPagingRequest()
-            {
-                Keyword = ""
-            };
-            var listProduct = await _fieldGroupService.GetAllPaging(
-                search
-            );
+            var listProduct = await _unitOfWork.GroupField.GetAll();
             return Ok(listProduct);
         }
 
