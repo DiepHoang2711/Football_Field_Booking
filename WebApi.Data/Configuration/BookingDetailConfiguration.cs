@@ -1,0 +1,21 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using WebApi.Data.Entites;
+
+namespace WebApi.Data.Configuration
+{
+    public class BookingDetailConfiguration : IEntityTypeConfiguration<BookingDetail>
+    {
+        public void Configure(EntityTypeBuilder<BookingDetail> builder)
+        {
+            builder.ToTable("BookingDetail");
+            builder.HasKey(x => x.BookingDetailId);
+
+            builder.HasOne(x => x.Booking).WithMany(x => x.BookingDetails)
+                  .HasForeignKey(x => x.BookingForeignKey);
+        }
+    }
+}

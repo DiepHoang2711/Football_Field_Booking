@@ -29,7 +29,6 @@ namespace WebApi.Bussiness.Services
                 Address = request.Address,
                 Name = request.Name,
                 Status = request.Status,
-                DateCreated = DateTime.Now
             };
 
             if(request.Image != null)

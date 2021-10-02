@@ -20,9 +20,13 @@ namespace WebApi.Data.EF
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //Configuration using Fluent APT
+            modelBuilder.ApplyConfiguration(new BookingConfiguration());
+            modelBuilder.ApplyConfiguration(new BookingDetailConfiguration());
+            modelBuilder.ApplyConfiguration(new FeedBackConfiguration());
             modelBuilder.ApplyConfiguration(new FieldConfiguration());
+            modelBuilder.ApplyConfiguration(new FieldScheduleConfiguration());
             modelBuilder.ApplyConfiguration(new GroupFieldConfiguration());
-            
+
             //Identity
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
@@ -38,17 +42,16 @@ namespace WebApi.Data.EF
             modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("UserToken")
                 .HasKey(x => x.UserId);
 
-
-
-
             //Seeding Data 
-            modelBuilder.Seed();
+            //modelBuilder.Seed();
 
-            //base.OnModelCreating(modelBuilder);
+            base.OnModelCreating(modelBuilder);
         }
-        public DbSet<Field> Fields { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
+        public DbSet<BookingDetail> BookingDetails { get; set; }
+        public DbSet<FeedBack> FeedBacks { get; set; }
         public DbSet<GroupField> GroupFields { get; set; }
-
-
+        public DbSet<Field> Fields { get; set; }
+        public DbSet<FieldSchedule> FieldSchedules { get; set; }
     }
 }

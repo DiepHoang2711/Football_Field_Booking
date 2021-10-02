@@ -41,8 +41,6 @@ namespace WebApi.Data.Extentions
                     Name = "A",
                     Address = "HN",
                     GroupFieldForeinKey = 1,
-                    OriginPrice = 10,
-                    DateCreated = System.DateTime.Now,
                     Status = true
                 },
                 new Field()
@@ -51,8 +49,6 @@ namespace WebApi.Data.Extentions
                     Name = "A",
                     Address = "HN",
                     GroupFieldForeinKey = 2,
-                    OriginPrice = 10,
-                    DateCreated = System.DateTime.Now,
                     Status = true
                 },
                 new Field()
@@ -61,8 +57,6 @@ namespace WebApi.Data.Extentions
                     Name = "A",
                     Address = "HN",
                     GroupFieldForeinKey = 3,
-                    OriginPrice = 10,
-                    DateCreated = System.DateTime.Now,
                     Status = true
                 }
                 );

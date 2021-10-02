@@ -10,6 +10,9 @@ namespace WebApi.Data.Entites
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime DoB { get; set; }
-
+        public ICollection<GroupField> GroupFields { get; set; }
+        public ICollection<Field> Fields { get; set; }
+        public ICollection<FeedBack> FeedBacks { get; set; }
+        public ICollection<Booking> Bookings { get; set; }
     }
 }
