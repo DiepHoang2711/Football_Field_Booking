@@ -16,10 +16,10 @@ namespace WebApi.Data.Configuration
             builder.Property(x => x.BookingId).UseIdentityColumn();
 
             builder.HasOne(x => x.User).WithMany(x => x.Bookings)
-                .HasForeignKey(x => x.UserForeignKey);
+                .HasForeignKey(x => x.UserForeignKey).IsRequired(false);
 
             builder.HasOne(x => x.FieldSchedule).WithMany(x => x.Bookings)
-                .HasForeignKey(x => x.FieldScheduleForeignKey);
+                .HasForeignKey(x => x.FieldScheduleForeignKey).IsRequired(false);
         }
     }
 }
