@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,9 +32,9 @@ namespace WebApi.Data.Repositories
             return await _context.Set<T>().FindAsync(id);
         }
 
-        public async Task<IEnumerable<T>> GetAll()
+        public async Task<IQueryable<T>> GetAll()
         {
-            return await _context.Set<T>().ToListAsync();
+            return (IQueryable<T>)await _context.Set<T>().ToListAsync();
         }
 
         public void Update(T entity)

@@ -12,6 +12,7 @@ namespace WebApi.Data.Configuration
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.ToTable("User");
+            builder.Property(x => x.Id).HasDefaultValueSql("NEWID()");
         }
     }
 }

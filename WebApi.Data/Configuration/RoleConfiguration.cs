@@ -12,6 +12,7 @@ namespace WebApi.Data.Configuration
         public void Configure(EntityTypeBuilder<Role> builder)
         {
             builder.ToTable("Role");
+            builder.Property(x => x.Id).HasDefaultValueSql("NEWID()");
             builder.Property(x => x.Description).HasMaxLength(200);
         }
     }

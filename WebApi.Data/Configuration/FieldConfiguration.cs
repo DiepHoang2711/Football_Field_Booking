@@ -13,6 +13,8 @@ namespace WebApi.Data.Configuration
         {
             builder.ToTable("Field");
             builder.HasKey(x => x.FieldId);
+            builder.Property(x => x.FieldId).UseIdentityColumn();
+
             builder.HasOne(x => x.GroupField).WithMany(x => x.Fields)
                 .HasForeignKey(x => x.GroupFieldForeinKey);
         }

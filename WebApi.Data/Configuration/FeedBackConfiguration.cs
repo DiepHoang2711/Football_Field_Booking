@@ -13,7 +13,7 @@ namespace WebApi.Data.Configuration
         {
             builder.ToTable("FeedBack");
             builder.HasKey(x => x.FeedBackId) ;
-
+            builder.Property(x => x.FeedBackId).UseIdentityColumn();
 
             builder.HasOne(x => x.User).WithMany(x => x.FeedBacks)
                 .HasForeignKey(x => x.UserIdForeignKey).IsRequired(false);

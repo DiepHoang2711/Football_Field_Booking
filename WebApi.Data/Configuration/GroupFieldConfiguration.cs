@@ -13,6 +13,8 @@ namespace WebApi.Data.Configuration
         {
             builder.ToTable("GroupField");
             builder.HasKey(x => x.GroupFieldId);
+            builder.Property(x => x.GroupFieldId).UseIdentityColumn();
+
             builder.Property(x => x.Name).IsRequired();
             builder.Property(x => x.Status).HasDefaultValue(true);
         }

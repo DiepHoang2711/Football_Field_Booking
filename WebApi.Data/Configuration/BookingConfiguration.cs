@@ -13,6 +13,8 @@ namespace WebApi.Data.Configuration
         {
             builder.ToTable("Booking");
             builder.HasKey(x => x.BookingId);
+            builder.Property(x => x.BookingId).UseIdentityColumn();
+
             builder.HasOne(x => x.User).WithMany(x => x.Bookings)
                 .HasForeignKey(x => x.UserForeignKey);
 
