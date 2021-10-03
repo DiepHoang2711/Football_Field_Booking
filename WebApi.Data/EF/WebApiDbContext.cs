@@ -33,7 +33,7 @@ namespace WebApi.Data.EF
 
             modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("UserClaim");
             modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("UserRole")
-                .HasKey(x => new { x.UserId, x.RoleId});
+                .HasKey(x => new { x.UserId, x.RoleId });
 
             modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("RoleClaim");
 
@@ -43,9 +43,9 @@ namespace WebApi.Data.EF
                 .HasKey(x => x.UserId);
 
             //Seeding Data 
-            //modelBuilder.Seed();
+            modelBuilder.Seed();
 
-            base.OnModelCreating(modelBuilder);
+            //base.OnModelCreating(modelBuilder);
         }
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<BookingDetail> BookingDetails { get; set; }
