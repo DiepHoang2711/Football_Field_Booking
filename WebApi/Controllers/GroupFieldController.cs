@@ -43,7 +43,7 @@ namespace WebApi.Controllers
 
         // POST api/<GroupFieldController>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] GroupFieldCreateRequest  request)
+        public async Task<IActionResult> Post([FromForm] GroupFieldCreateRequest  request)
         {
             var newGroupField = new GroupField();
 
