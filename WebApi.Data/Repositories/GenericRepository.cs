@@ -32,9 +32,9 @@ namespace WebApi.Data.Repositories
             return await _context.Set<T>().FindAsync(id);
         }
 
-        public async Task<IQueryable<T>> GetAll()
+        public async Task<ICollection<T>> GetAll()
         {
-            return (IQueryable<T>)await _context.Set<T>().ToListAsync();
+            return await _context.Set<T>().ToListAsync();
         }
 
         public void Update(T entity)
