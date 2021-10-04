@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using WebApi.Bussiness.IServices;
 using WebApi.Bussiness.Services;
 using WebApi.Data.EF;
@@ -28,11 +29,16 @@ namespace WebApi
 
 
             // DI
-            services.AddTransient<IStorageService , FileStorageService>();
+            services.AddTransient<IStorageService, FileStorageService>();
             services.AddTransient<IGroupFieldRepository, GroupFieldRepository>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             services.AddControllers();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Swagger BookingField", Version = "v1" });
+            });
 
         }
 
@@ -51,6 +57,13 @@ namespace WebApi
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Swagger BookingField V1");
+            });
 
             app.UseEndpoints(endpoints =>
             {
