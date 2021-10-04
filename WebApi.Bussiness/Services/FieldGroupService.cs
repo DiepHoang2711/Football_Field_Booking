@@ -13,7 +13,7 @@ using WebApi.Data.Entites;
 
 namespace WebApi.Bussiness.Services
 {
-    public class FieldGroupService : IFieldGroupService
+    public class FieldGroupService
     {
         private readonly WebApiDbContext _context;
         private readonly IStorageService _fileStorageService;
@@ -22,7 +22,7 @@ namespace WebApi.Bussiness.Services
             _context = context;
             _fileStorageService = fileStorageService;
         }
-        public async Task<int> Create(FieldGroupCreateRequest request)
+        public async Task<int> Create(GroupFieldCreateRequest request)
         {
             var groupField = new GroupField()
             {
@@ -33,8 +33,8 @@ namespace WebApi.Bussiness.Services
 
             if(request.Image != null)
             {
-                groupField.ImagePath= await this.SaveFile(request.Image);
-                groupField.ImageName = request.ImageName;
+                //groupField.ImagePath= await this.SaveFile(request.Image);
+                //groupField.ImageName = request.ImageName;
             }
             await _context.GroupFields.AddAsync(groupField);
             return await _context.SaveChangesAsync();
@@ -86,18 +86,6 @@ namespace WebApi.Bussiness.Services
             }
 
             return await _context.SaveChangesAsync();
-        }
-
-
-        private async Task<string> SaveFile(IFormFile file)
-        {
-            var originalFileName = ContentDispositionHeaderValue
-                .Parse(file.ContentDisposition)
-                .FileName.Trim('"');
-
-            var fileName = $"{Guid.NewGuid()}{Path.GetExtension(originalFileName)}";
-            await _fileStorageService.SaveFileAsync(file.OpenReadStream(), fileName);
-            return fileName;
         }
     }
 }
