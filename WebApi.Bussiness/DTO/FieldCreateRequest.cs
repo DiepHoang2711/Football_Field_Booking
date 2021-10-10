@@ -11,10 +11,10 @@ namespace WebApi.Bussiness.DTO
         public string Address { get; set; }
         public string ImagePath { get; set; }
         public string ImageName { get; set; }
-        public DateTime CreatedAt { get; set; }
+        //public DateTime CreatedAt { get; set; }
         public bool Status { get; set; }
-        public bool IsHot { get; set; }
-        public int TopHot { get; set; }
+        //public bool IsHot { get; set; }
+        //public int TopHot { get; set; }
         public int GroupFieldForeinKey { get; set; }
         public Guid UserForeignKey { get; set; }
         public IFormFile Image { get; set; }

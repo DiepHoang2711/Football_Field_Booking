@@ -11,5 +11,7 @@ namespace WebApi.Bussiness.DTO
         public DateTime TimeEnd { get; set; }
         public bool Status { get; set; }
         public decimal Price { get; set; }
+        public int FieldForeignKey { get; set; }
+
     }
 }

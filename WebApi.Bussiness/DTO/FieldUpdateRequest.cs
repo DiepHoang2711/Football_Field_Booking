@@ -13,14 +13,9 @@ namespace WebApi.Bussiness.DTO
         public string ImagePath { get; set; }
         public string ImageName { get; set; }
         public bool Status { get; set; }
-        public bool IsHot { get; set; }
-        public int TopHot { get; set; }
         public int GroupFieldForeinKey { get; set; }
         public IFormFile Image { get; set; }
-
         public Guid UserForeignKey { get; set; }
-
-        public ICollection<FieldScheduleUpdateRequest> fieldSchedules { get; set; }
 
     }
 }

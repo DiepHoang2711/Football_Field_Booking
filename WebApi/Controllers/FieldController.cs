@@ -60,9 +60,6 @@ namespace WebApi.Controllers
             newField.Name = request.Name;
             newField.Address = request.Address;
             newField.Status = true;
-            newField.CreatedAt = DateTime.Now;
-            newField.TopHot = request.TopHot;
-            newField.IsHot = request.IsHot;
             newField.UserForeignKey = request.UserForeignKey;
             newField.GroupFieldForeinKey = request.GroupFieldForeinKey;
             
@@ -91,7 +88,6 @@ namespace WebApi.Controllers
             }
             field.ImageName = request.ImageName ?? request.Name;
             field.Name = request.Name;
-            field.CreatedAt = DateTime.Now;
             field.Status = request.Status;
             field.Address = request.Address;
             field.UserForeignKey = request.UserForeignKey;
