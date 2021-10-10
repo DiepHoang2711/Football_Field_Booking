@@ -29,6 +29,8 @@ namespace WebApi
 
 
             // DI
+            services.AddTransient<IFieldRepository, FieldRepository>();
+            services.AddTransient<IFieldScheduleRepository, FieldScheduleRepository>();
             services.AddTransient<IStorageService, FileStorageService>();
             services.AddTransient<IGroupFieldRepository, GroupFieldRepository>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();

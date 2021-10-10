@@ -14,6 +14,10 @@ namespace WebApi.Data.Configuration
             builder.ToTable("Field");
             builder.HasKey(x => x.FieldId);
             builder.Property(x => x.FieldId).UseIdentityColumn();
+            builder.Property(x => x.TopHot).HasDefaultValue(-1);
+            builder.Property(x => x.IsHot).HasDefaultValue(false);
+            builder.Property(x => x.CreatedAt).HasDefaultValue(DateTime.Now);
+
 
             builder.HasOne(x => x.GroupField).WithMany(x => x.Fields)
                 .HasForeignKey(x => x.GroupFieldForeinKey);

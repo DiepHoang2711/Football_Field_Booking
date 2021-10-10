@@ -13,9 +13,6 @@ namespace WebApi.Data.Repositories
         {
 
         }
-        public Task<IEnumerable<GroupField>> GetTopRate()
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }
