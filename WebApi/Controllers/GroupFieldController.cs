@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using WebApi.Bussiness.DTO;
 using WebApi.Bussiness.IServices;
@@ -23,6 +24,7 @@ namespace WebApi.Controllers
         }
         // GET: api/<GroupFieldController>
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Get()
         {
             var listProduct = await _unitOfWork.GroupField.GetAll();
