@@ -72,7 +72,7 @@ namespace WebApi.Controllers
 
         // PUT api/<GroupFieldController>/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] GroupFieldCreateRequest request)
+        public async Task<IActionResult> Put(int id, [FromForm] GroupFieldCreateRequest request)
         {
             var groupField = await _unitOfWork.GroupField.Get(id);
             if(groupField == null)

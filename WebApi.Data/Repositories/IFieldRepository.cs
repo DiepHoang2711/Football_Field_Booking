@@ -7,7 +7,8 @@ using WebApi.Data.Entites;
 
 namespace WebApi.Data.Repositories
 {
-    public interface IGroupFieldRepository : IGenericRepository<GroupField>
+    public interface IFieldRepository : IGenericRepository<Field>
     {
+
     }
 }

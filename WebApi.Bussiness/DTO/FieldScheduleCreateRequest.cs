@@ -2,17 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace WebApi.Data.Entites
+namespace WebApi.Bussiness.DTO
 {
-    public class FieldSchedule
+    public class FieldScheduleCreateRequest
     {
-        public int FieldScheduleID { get; set; }
         public DateTime TimeStart { get; set; }
         public DateTime TimeEnd { get; set; }
         public bool Status { get; set; }
         public decimal Price { get; set; }
         public int FieldForeignKey { get; set; }
-        public Field Field { get; set; }
-        public ICollection<Booking> Bookings { get; set; }
+
     }
 }

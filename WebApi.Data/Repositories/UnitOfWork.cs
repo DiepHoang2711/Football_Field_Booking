@@ -9,11 +9,16 @@ namespace WebApi.Data.Repositories
     {
         private readonly WebApiDbContext _context;
         public IGroupFieldRepository GroupField { get; }
+        public IFieldRepository Field { get; }
+
+        public IFieldScheduleRepository FieldSchedule { get; }
 
         public UnitOfWork(WebApiDbContext context)
         {
             _context = context;
             GroupField = new GroupFieldRepository(context);
+            Field = new FieldRepository(context);
+            FieldSchedule = new FieldScheduleRepository(context);
         }
         public int Complete()
         {
