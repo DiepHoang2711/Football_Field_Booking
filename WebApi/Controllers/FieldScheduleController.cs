@@ -26,6 +26,12 @@ namespace WebApi.Controllers
             _storageService = storageService;
         }
 
+        [HttpGet("Schedule/{id}")]
+        public async Task<IActionResult> GetSchedule(int id)
+        {
+            var listTime = await _unitOfWork.FieldSchedule.getScheduleAvailable(id);
+            return Ok(listTime);
+        }
         // GET: api/<FieldScheduleController>
         [HttpGet]
         public async Task<IActionResult> Get()
