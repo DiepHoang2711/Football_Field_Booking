@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using WebApi.Bussiness.DTO;
 using WebApi.Bussiness.Services;
@@ -46,6 +49,23 @@ namespace WebApi.Controllers
                 return BadRequest("Register is not successful");
             }
             return Ok();
+        }
+
+        [HttpGet("userId")]
+        [Authorize]
+        public IActionResult GetUserId()
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            if (identity != null)
+            {
+                IEnumerable<Claim> claims = identity.Claims;
+
+                var userIdClaim = claims
+                    .Where(x => x.Type == ClaimTypes.NameIdentifier)
+                    .FirstOrDefault();
+                return Ok(userIdClaim.Value);
+            }
+            return Unauthorized();
         }
 
     }

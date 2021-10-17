@@ -42,6 +42,7 @@ namespace WebApi.Bussiness.Services
             var claims = new[]
             {
                 new Claim(ClaimTypes.MobilePhone, user.PhoneNumber),
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Role, string.Join(";",roles))
             };
 
