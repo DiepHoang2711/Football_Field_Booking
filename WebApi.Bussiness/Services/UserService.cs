@@ -73,8 +73,16 @@ namespace WebApi.Bussiness.Services
             };
 
             var result = await _userManager.CreateAsync(user, request.Password);
-            if (result.Succeeded)
+            if( result.Succeeded)
             {
+                bool checkUserExist = await _roleManager.RoleExistsAsync("USER");
+                if (!checkUserExist)
+                {
+                    var role = new Role();
+                    role.Name = "USER";
+                    await _roleManager.CreateAsync(role);
+                    await _userManager.AddToRoleAsync(user, "USER");
+                }
                 return true;
             }
             return false;
