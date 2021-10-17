@@ -14,8 +14,15 @@ namespace WebApi.Data.Configuration
             builder.ToTable("BookingDetail");
             builder.HasKey(x => x.BookingDetailId);
             builder.Property(x => x.BookingDetailId).UseIdentityColumn();
+
             builder.HasOne(x => x.Booking).WithMany(x => x.BookingDetails)
-                  .HasForeignKey(x => x.BookingForeignKey);
+                  .HasForeignKey(x => x.BookingForeignKey).IsRequired(false);
+
+            builder.HasOne(x => x.FieldSchedule).WithMany(x => x.BookingDetails)
+                  .HasForeignKey(x => x.FieldScheduleForeignKey).IsRequired(false);
+
+            builder.HasOne(x => x.Field).WithMany(x => x.BookingDetails)
+                   .HasForeignKey(x => x.FieldForeignKey).IsRequired(false);
         }
     }
 }

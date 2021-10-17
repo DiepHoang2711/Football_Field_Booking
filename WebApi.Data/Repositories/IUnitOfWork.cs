@@ -8,7 +8,9 @@ namespace WebApi.Data.Repositories
     {
         IGroupFieldRepository GroupField { get; }
         IFieldRepository Field { get; }
-        IFieldScheduleRepository FieldSchedule {get;}
+        IFieldScheduleRepository FieldSchedule { get; }
+        IBookingRepository Booking { get; }
+        IBookingDetailRepository BookingDetail { get; }
 
         int Complete();
     }

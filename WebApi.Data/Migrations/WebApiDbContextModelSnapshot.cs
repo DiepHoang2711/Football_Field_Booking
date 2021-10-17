@@ -126,9 +126,6 @@ namespace WebApi.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("FieldScheduleForeignKey")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("OriginPrice")
                         .HasColumnType("decimal(18,2)");
 
@@ -142,8 +139,6 @@ namespace WebApi.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("BookingId");
-
-                    b.HasIndex("FieldScheduleForeignKey");
 
                     b.HasIndex("UserForeignKey");
 
@@ -162,6 +157,12 @@ namespace WebApi.Data.Migrations
                     b.Property<int>("BookingForeignKey")
                         .HasColumnType("int");
 
+                    b.Property<int>("FieldForeignKey")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FieldScheduleForeignKey")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
@@ -177,6 +178,10 @@ namespace WebApi.Data.Migrations
                     b.HasKey("BookingDetailId");
 
                     b.HasIndex("BookingForeignKey");
+
+                    b.HasIndex("FieldForeignKey");
+
+                    b.HasIndex("FieldScheduleForeignKey");
 
                     b.ToTable("BookingDetail");
                 });
@@ -232,7 +237,7 @@ namespace WebApi.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2021, 10, 10, 19, 36, 48, 2, DateTimeKind.Local).AddTicks(1021));
+                        .HasDefaultValue(new DateTime(2021, 10, 18, 1, 3, 35, 368, DateTimeKind.Local).AddTicks(1009));
 
                     b.Property<DateTime>("DeletedAt")
                         .HasColumnType("datetime2");
@@ -278,7 +283,7 @@ namespace WebApi.Data.Migrations
                         {
                             FieldId = 1,
                             Address = "HN",
-                            CreatedAt = new DateTime(2021, 10, 10, 19, 36, 48, 35, DateTimeKind.Local).AddTicks(4491),
+                            CreatedAt = new DateTime(2021, 10, 18, 1, 3, 35, 399, DateTimeKind.Local).AddTicks(9531),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GroupFieldForeinKey = 1,
                             IsHot = true,
@@ -291,7 +296,7 @@ namespace WebApi.Data.Migrations
                         {
                             FieldId = 2,
                             Address = "HN",
-                            CreatedAt = new DateTime(2021, 10, 10, 19, 36, 48, 35, DateTimeKind.Local).AddTicks(6108),
+                            CreatedAt = new DateTime(2021, 10, 18, 1, 3, 35, 400, DateTimeKind.Local).AddTicks(875),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GroupFieldForeinKey = 1,
                             IsHot = true,
@@ -304,7 +309,7 @@ namespace WebApi.Data.Migrations
                         {
                             FieldId = 3,
                             Address = "HN",
-                            CreatedAt = new DateTime(2021, 10, 10, 19, 36, 48, 35, DateTimeKind.Local).AddTicks(6194),
+                            CreatedAt = new DateTime(2021, 10, 18, 1, 3, 35, 400, DateTimeKind.Local).AddTicks(931),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GroupFieldForeinKey = 1,
                             IsHot = true,
@@ -317,7 +322,7 @@ namespace WebApi.Data.Migrations
                         {
                             FieldId = 4,
                             Address = "HN",
-                            CreatedAt = new DateTime(2021, 10, 10, 19, 36, 48, 35, DateTimeKind.Local).AddTicks(6218),
+                            CreatedAt = new DateTime(2021, 10, 18, 1, 3, 35, 400, DateTimeKind.Local).AddTicks(935),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GroupFieldForeinKey = 2,
                             IsHot = true,
@@ -330,7 +335,7 @@ namespace WebApi.Data.Migrations
                         {
                             FieldId = 5,
                             Address = "HN",
-                            CreatedAt = new DateTime(2021, 10, 10, 19, 36, 48, 35, DateTimeKind.Local).AddTicks(6234),
+                            CreatedAt = new DateTime(2021, 10, 18, 1, 3, 35, 400, DateTimeKind.Local).AddTicks(938),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GroupFieldForeinKey = 2,
                             IsHot = true,
@@ -469,7 +474,7 @@ namespace WebApi.Data.Migrations
                         {
                             GroupFieldId = 1,
                             Address = "HN",
-                            CreatedAt = new DateTime(2021, 10, 10, 19, 36, 48, 14, DateTimeKind.Local).AddTicks(1148),
+                            CreatedAt = new DateTime(2021, 10, 18, 1, 3, 35, 379, DateTimeKind.Local).AddTicks(6909),
                             Description = "Sports facilities are the most valuable asset in the business. has always focused on creating more value for its partners. Our system is built on feedback from sports facilities.",
                             Name = "Hoang",
                             Status = true,
@@ -479,7 +484,7 @@ namespace WebApi.Data.Migrations
                         {
                             GroupFieldId = 2,
                             Address = "HN",
-                            CreatedAt = new DateTime(2021, 10, 10, 19, 36, 48, 14, DateTimeKind.Local).AddTicks(1860),
+                            CreatedAt = new DateTime(2021, 10, 18, 1, 3, 35, 379, DateTimeKind.Local).AddTicks(7617),
                             Description = "Sports facilities are the most valuable asset in the business. has always focused on creating more value for its partners. Our system is built on feedback from sports facilities.",
                             Name = "VanTam",
                             Status = true,
@@ -515,21 +520,21 @@ namespace WebApi.Data.Migrations
                         new
                         {
                             Id = new Guid("ab1052cc-e279-465d-a9df-25d1795ce0f3"),
-                            ConcurrencyStamp = "367b58e9-104a-4dfc-9293-3c7f222a287f",
+                            ConcurrencyStamp = "8bbd62f5-f97d-48e4-855e-164fb5e98bbd",
                             Description = "Admin is boss",
                             Name = "ADMIN"
                         },
                         new
                         {
                             Id = new Guid("0d854a38-ea51-4f87-8e05-d7d44db368e1"),
-                            ConcurrencyStamp = "8ed3b419-3171-43ec-aa3d-0536d7ff0175",
+                            ConcurrencyStamp = "5886aeff-c6da-444e-879f-d4d3e5a9d264",
                             Description = "Owner is manager",
                             Name = "OWNER"
                         },
                         new
                         {
                             Id = new Guid("45a5286c-02e9-4b43-a81f-bb32dceecffd"),
-                            ConcurrencyStamp = "438390dd-b8b8-46c0-bb4d-e2c1b5be3c22",
+                            ConcurrencyStamp = "334c163b-7c47-4b5c-b73d-8fc45ee68f2b",
                             Description = "User is user",
                             Name = "USER"
                         });
@@ -602,14 +607,14 @@ namespace WebApi.Data.Migrations
                         {
                             Id = new Guid("76d27679-bf33-43ce-abeb-5c85341cc1b9"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5a456101-3c60-4bc0-9d40-cb0c6f9e29fc",
+                            ConcurrencyStamp = "61cf0856-5fd3-43c4-a2b4-98404164cef9",
                             DoB = new DateTime(1998, 5, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "hoangbd@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Bach Duy",
                             LastName = "Hoang",
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEOWT5GX8WKST7+iKAQpwwg1DgRqkNzyVzyeEhygrDe6pM8C85fTc/Y2nEKmuHSXOlg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGzq6K1aCMsLEjfVR7TNrqANKJ0ulwSej2Yv0hA5jmxss5/2bLqSZXqxs3OQ26S4lQ==",
                             PhoneNumber = "09356248153",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false
@@ -618,14 +623,14 @@ namespace WebApi.Data.Migrations
                         {
                             Id = new Guid("66fb69ca-8a82-46bf-b2cf-4101db00cccb"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9a823003-afe1-436f-9f3e-fd2b5f56ab3b",
+                            ConcurrencyStamp = "bc3d29e0-57d1-4673-a6d1-a56d36a2abb5",
                             DoB = new DateTime(2000, 8, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "tamnv@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Nguyen Van",
                             LastName = "Tam",
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEDeCs9GxdrosEI74nmjb3RG7qNOAoielv+aQvQqXVTssFFU7+zd5DvuWIxlaMSvyUA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGl01yb+jr23DGMcLeWzzY0RYuZ4WOmhp0AvuVJ0QxAtnltqOkTc8jejgaLG9IVqSg==",
                             PhoneNumber = "096589475135",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false
@@ -634,15 +639,9 @@ namespace WebApi.Data.Migrations
 
             modelBuilder.Entity("WebApi.Data.Entites.Booking", b =>
                 {
-                    b.HasOne("WebApi.Data.Entites.FieldSchedule", "FieldSchedule")
-                        .WithMany("Bookings")
-                        .HasForeignKey("FieldScheduleForeignKey");
-
                     b.HasOne("WebApi.Data.Entites.User", "User")
                         .WithMany("Bookings")
                         .HasForeignKey("UserForeignKey");
-
-                    b.Navigation("FieldSchedule");
 
                     b.Navigation("User");
                 });
@@ -651,11 +650,21 @@ namespace WebApi.Data.Migrations
                 {
                     b.HasOne("WebApi.Data.Entites.Booking", "Booking")
                         .WithMany("BookingDetails")
-                        .HasForeignKey("BookingForeignKey")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BookingForeignKey");
+
+                    b.HasOne("WebApi.Data.Entites.Field", "Field")
+                        .WithMany("BookingDetails")
+                        .HasForeignKey("FieldForeignKey");
+
+                    b.HasOne("WebApi.Data.Entites.FieldSchedule", "FieldSchedule")
+                        .WithMany("BookingDetails")
+                        .HasForeignKey("FieldScheduleForeignKey");
 
                     b.Navigation("Booking");
+
+                    b.Navigation("Field");
+
+                    b.Navigation("FieldSchedule");
                 });
 
             modelBuilder.Entity("WebApi.Data.Entites.FeedBack", b =>
@@ -721,12 +730,14 @@ namespace WebApi.Data.Migrations
 
             modelBuilder.Entity("WebApi.Data.Entites.Field", b =>
                 {
+                    b.Navigation("BookingDetails");
+
                     b.Navigation("FieldSchedules");
                 });
 
             modelBuilder.Entity("WebApi.Data.Entites.FieldSchedule", b =>
                 {
-                    b.Navigation("Bookings");
+                    b.Navigation("BookingDetails");
                 });
 
             modelBuilder.Entity("WebApi.Data.Entites.GroupField", b =>

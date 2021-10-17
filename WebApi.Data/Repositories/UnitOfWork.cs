@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using WebApi.Data.EF;
+using WebApi.Data.Entites;
 
 namespace WebApi.Data.Repositories
 {
@@ -10,8 +11,9 @@ namespace WebApi.Data.Repositories
         private readonly WebApiDbContext _context;
         public IGroupFieldRepository GroupField { get; }
         public IFieldRepository Field { get; }
-
         public IFieldScheduleRepository FieldSchedule { get; }
+        public IBookingRepository Booking { get; }
+        public IBookingDetailRepository BookingDetail { get; }
 
         public UnitOfWork(WebApiDbContext context)
         {
@@ -19,6 +21,9 @@ namespace WebApi.Data.Repositories
             GroupField = new GroupFieldRepository(context);
             Field = new FieldRepository(context);
             FieldSchedule = new FieldScheduleRepository(context);
+            Booking = new BookingRepository(context);
+            BookingDetail = new BookingDetailRepository(context);
+
         }
         public int Complete()
         {

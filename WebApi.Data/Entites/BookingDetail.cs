@@ -12,6 +12,10 @@ namespace WebApi.Data.Entites
         public decimal Price { get; set; }
         public bool Status { get; set; }
         public int BookingForeignKey { get; set; }
+        public int FieldScheduleForeignKey { get; set; }
+        public int FieldForeignKey { get; set; }
+        public Field Field { get; set; }
+        public FieldSchedule FieldSchedule { get; set; }
         public Booking Booking { get; set; }
     }
 }

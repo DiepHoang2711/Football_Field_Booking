@@ -11,8 +11,6 @@ namespace WebApi.Data.Repositories
     {
         Task<T> Get(int id);
         Task<ICollection<T>> GetAll();
-        //Task<ICollection<T>> GetAllPaging(Expression<Func<T, bool>> filter, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
-        //    string includeProperties = "", int pageSize = 10, int pageNumber = 1);
         Task Add(T entity);
         void Delete(T entity);
         void Update(T entity);
