@@ -1,8 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using WebApi.Bussiness.DTO;
 using WebApi.Bussiness.IServices;
+using WebApi.Bussiness.Services;
 using WebApi.Data.Entites;
 using WebApi.Data.Repositories;
 
@@ -16,11 +20,13 @@ namespace WebApi.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IStorageService _storageService;
+        private readonly IUserService _userService;
 
-        public GroupFieldController(IUnitOfWork unitOfWork, IStorageService storageService)
+        public GroupFieldController(IUnitOfWork unitOfWork, IStorageService storageService, IUserService userService)
         {
             _unitOfWork = unitOfWork;
             _storageService = storageService;
+            _userService = userService;
         }
         // GET: api/<GroupFieldController>
         [HttpGet]
