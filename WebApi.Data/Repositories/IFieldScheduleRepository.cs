@@ -8,9 +8,9 @@ namespace WebApi.Data.Repositories
 {
     public interface IFieldScheduleRepository : IGenericRepository<FieldSchedule>
     {
-        Task<List<int>> getScheduleAvailable(int id);
+        Task<List<int>> GetScheduleAvailable(int idField, DateTime bookingDate);
 
-        Task<List<int>> getSchedule(int id);
+        Task<List<int>> GetSchedule(int id);
     }
 
 }

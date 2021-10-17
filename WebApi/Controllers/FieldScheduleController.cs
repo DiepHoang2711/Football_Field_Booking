@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,10 +27,10 @@ namespace WebApi.Controllers
             _storageService = storageService;
         }
 
-        [HttpGet("Schedule/{id}")]
-        public async Task<IActionResult> GetSchedule(int id)
+        [HttpGet("ScheduleAvailable/{id}")]
+        public async Task<IActionResult> GetSchedule(int id, DateTime bookingDate)
         {
-            var listTime = await _unitOfWork.FieldSchedule.getScheduleAvailable(id);
+            var listTime = await _unitOfWork.FieldSchedule.GetScheduleAvailable(id, bookingDate);
             return Ok(listTime);
         }
         // GET: api/<FieldScheduleController>

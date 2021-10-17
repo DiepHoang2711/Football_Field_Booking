@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebApi.Data.Migrations
 {
-    public partial class initdatabase : Migration
+    public partial class updatedatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -121,6 +121,29 @@ namespace WebApi.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Booking",
+                columns: table => new
+                {
+                    BookingId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    OriginPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    TotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Status = table.Column<bool>(type: "bit", nullable: false),
+                    UserForeignKey = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Booking", x => x.BookingId);
+                    table.ForeignKey(
+                        name: "FK_Booking_User_UserForeignKey",
+                        column: x => x.UserForeignKey,
+                        principalTable: "User",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "GroupField",
                 columns: table => new
                 {
@@ -145,116 +168,6 @@ namespace WebApi.Data.Migrations
                         principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Field",
-                columns: table => new
-                {
-                    FieldId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ImageName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Status = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsHot = table.Column<bool>(type: "bit", nullable: false),
-                    TopHot = table.Column<int>(type: "int", nullable: false),
-                    GroupFieldForeinKey = table.Column<int>(type: "int", nullable: false),
-                    UserForeignKey = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Field", x => x.FieldId);
-                    table.ForeignKey(
-                        name: "FK_Field_GroupField_GroupFieldForeinKey",
-                        column: x => x.GroupFieldForeinKey,
-                        principalTable: "GroupField",
-                        principalColumn: "GroupFieldId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Field_User_UserForeignKey",
-                        column: x => x.UserForeignKey,
-                        principalTable: "User",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "FieldSchedule",
-                columns: table => new
-                {
-                    FieldScheduleID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TimeStart = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TimeEnd = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Status = table.Column<bool>(type: "bit", nullable: false),
-                    FieldForeignKey = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_FieldSchedule", x => x.FieldScheduleID);
-                    table.ForeignKey(
-                        name: "FK_FieldSchedule_Field_FieldForeignKey",
-                        column: x => x.FieldForeignKey,
-                        principalTable: "Field",
-                        principalColumn: "FieldId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Booking",
-                columns: table => new
-                {
-                    BookingId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    OriginPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    TotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Status = table.Column<bool>(type: "bit", nullable: false),
-                    FieldScheduleForeignKey = table.Column<int>(type: "int", nullable: false),
-                    UserForeignKey = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Booking", x => x.BookingId);
-                    table.ForeignKey(
-                        name: "FK_Booking_FieldSchedule_FieldScheduleForeignKey",
-                        column: x => x.FieldScheduleForeignKey,
-                        principalTable: "FieldSchedule",
-                        principalColumn: "FieldScheduleID",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Booking_User_UserForeignKey",
-                        column: x => x.UserForeignKey,
-                        principalTable: "User",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "BookingDetail",
-                columns: table => new
-                {
-                    BookingDetailId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TimeStart = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TimeEnd = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Status = table.Column<bool>(type: "bit", nullable: false),
-                    BookingForeignKey = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BookingDetail", x => x.BookingDetailId);
-                    table.ForeignKey(
-                        name: "FK_BookingDetail_Booking_BookingForeignKey",
-                        column: x => x.BookingForeignKey,
-                        principalTable: "Booking",
-                        principalColumn: "BookingId",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -287,13 +200,108 @@ namespace WebApi.Data.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Field",
+                columns: table => new
+                {
+                    FieldId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImageName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2021, 10, 18, 1, 3, 35, 368, DateTimeKind.Local).AddTicks(1009)),
+                    Status = table.Column<bool>(type: "bit", nullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsHot = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    TopHot = table.Column<int>(type: "int", nullable: false, defaultValue: -1),
+                    GroupFieldForeinKey = table.Column<int>(type: "int", nullable: false),
+                    UserForeignKey = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Field", x => x.FieldId);
+                    table.ForeignKey(
+                        name: "FK_Field_GroupField_GroupFieldForeinKey",
+                        column: x => x.GroupFieldForeinKey,
+                        principalTable: "GroupField",
+                        principalColumn: "GroupFieldId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Field_User_UserForeignKey",
+                        column: x => x.UserForeignKey,
+                        principalTable: "User",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "FieldSchedule",
+                columns: table => new
+                {
+                    FieldScheduleID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TimeStart = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TimeEnd = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Status = table.Column<bool>(type: "bit", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    FieldForeignKey = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FieldSchedule", x => x.FieldScheduleID);
+                    table.ForeignKey(
+                        name: "FK_FieldSchedule_Field_FieldForeignKey",
+                        column: x => x.FieldForeignKey,
+                        principalTable: "Field",
+                        principalColumn: "FieldId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BookingDetail",
+                columns: table => new
+                {
+                    BookingDetailId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TimeStart = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TimeEnd = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Status = table.Column<bool>(type: "bit", nullable: false),
+                    BookingForeignKey = table.Column<int>(type: "int", nullable: false),
+                    FieldScheduleForeignKey = table.Column<int>(type: "int", nullable: false),
+                    FieldForeignKey = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BookingDetail", x => x.BookingDetailId);
+                    table.ForeignKey(
+                        name: "FK_BookingDetail_Booking_BookingForeignKey",
+                        column: x => x.BookingForeignKey,
+                        principalTable: "Booking",
+                        principalColumn: "BookingId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_BookingDetail_Field_FieldForeignKey",
+                        column: x => x.FieldForeignKey,
+                        principalTable: "Field",
+                        principalColumn: "FieldId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_BookingDetail_FieldSchedule_FieldScheduleForeignKey",
+                        column: x => x.FieldScheduleForeignKey,
+                        principalTable: "FieldSchedule",
+                        principalColumn: "FieldScheduleID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.InsertData(
                 table: "GroupField",
                 columns: new[] { "GroupFieldId", "Address", "CreatedAt", "Description", "ImageName", "ImagePath", "Name", "Status", "UserForeignKey", "UserId" },
                 values: new object[,]
                 {
-                    { 1, "HN", new DateTime(2021, 10, 3, 17, 43, 52, 402, DateTimeKind.Local).AddTicks(4816), "Sports facilities are the most valuable asset in the business. has always focused on creating more value for its partners. Our system is built on feedback from sports facilities.", null, null, "Hoang", true, new Guid("76d27679-bf33-43ce-abeb-5c85341cc1b9"), null },
-                    { 2, "HN", new DateTime(2021, 10, 3, 17, 43, 52, 403, DateTimeKind.Local).AddTicks(2832), "Sports facilities are the most valuable asset in the business. has always focused on creating more value for its partners. Our system is built on feedback from sports facilities.", null, null, "VanTam", true, new Guid("66fb69ca-8a82-46bf-b2cf-4101db00cccb"), null }
+                    { 1, "HN", new DateTime(2021, 10, 18, 1, 3, 35, 379, DateTimeKind.Local).AddTicks(6909), "Sports facilities are the most valuable asset in the business. has always focused on creating more value for its partners. Our system is built on feedback from sports facilities.", null, null, "Hoang", true, new Guid("76d27679-bf33-43ce-abeb-5c85341cc1b9"), null },
+                    { 2, "HN", new DateTime(2021, 10, 18, 1, 3, 35, 379, DateTimeKind.Local).AddTicks(7617), "Sports facilities are the most valuable asset in the business. has always focused on creating more value for its partners. Our system is built on feedback from sports facilities.", null, null, "VanTam", true, new Guid("66fb69ca-8a82-46bf-b2cf-4101db00cccb"), null }
                 });
 
             migrationBuilder.InsertData(
@@ -301,9 +309,9 @@ namespace WebApi.Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("ab1052cc-e279-465d-a9df-25d1795ce0f3"), "97738d71-6da8-4fe7-8446-e7c2b4212260", "Admin is boss", "ADMIN", null },
-                    { new Guid("0d854a38-ea51-4f87-8e05-d7d44db368e1"), "025c2433-4faa-4eb7-881d-d5ae93540d0e", "Owner is manager", "OWNER", null },
-                    { new Guid("45a5286c-02e9-4b43-a81f-bb32dceecffd"), "39bd001b-83f1-4994-a443-799c6ce92035", "User is user", "USER", null }
+                    { new Guid("ab1052cc-e279-465d-a9df-25d1795ce0f3"), "8bbd62f5-f97d-48e4-855e-164fb5e98bbd", "Admin is boss", "ADMIN", null },
+                    { new Guid("0d854a38-ea51-4f87-8e05-d7d44db368e1"), "5886aeff-c6da-444e-879f-d4d3e5a9d264", "Owner is manager", "OWNER", null },
+                    { new Guid("45a5286c-02e9-4b43-a81f-bb32dceecffd"), "334c163b-7c47-4b5c-b73d-8fc45ee68f2b", "User is user", "USER", null }
                 });
 
             migrationBuilder.InsertData(
@@ -311,8 +319,8 @@ namespace WebApi.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DoB", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("76d27679-bf33-43ce-abeb-5c85341cc1b9"), 0, "a3df133a-24dd-43af-bb93-506b4ee2159c", new DateTime(1998, 5, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), "hoangbd@gmail.com", false, "Bach Duy", "Hoang", false, null, null, null, "AQAAAAEAACcQAAAAEJgx45UX9EGsY0LROzOb4jLV71Sy3WbzPUTHgRHSNAgT6sFbEFd9qGlVY5KHGtNgIg==", "09356248153", false, null, false, null },
-                    { new Guid("66fb69ca-8a82-46bf-b2cf-4101db00cccb"), 0, "b550dd39-84aa-493c-86b0-b8b228f193b2", new DateTime(2000, 8, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "tamnv@gmail.com", false, "Nguyen Van", "Tam", false, null, null, null, "AQAAAAEAACcQAAAAEDqEwVU6jEZ7XeksvyFgqZ+2rdbQGOwv6YdVNhJOeVXgniPed+Mb+dcNRQxNxWxVQw==", "096589475135", false, null, false, null }
+                    { new Guid("76d27679-bf33-43ce-abeb-5c85341cc1b9"), 0, "61cf0856-5fd3-43c4-a2b4-98404164cef9", new DateTime(1998, 5, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), "hoangbd@gmail.com", false, "Bach Duy", "Hoang", false, null, null, null, "AQAAAAEAACcQAAAAEGzq6K1aCMsLEjfVR7TNrqANKJ0ulwSej2Yv0hA5jmxss5/2bLqSZXqxs3OQ26S4lQ==", "09356248153", false, null, false, null },
+                    { new Guid("66fb69ca-8a82-46bf-b2cf-4101db00cccb"), 0, "bc3d29e0-57d1-4673-a6d1-a56d36a2abb5", new DateTime(2000, 8, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "tamnv@gmail.com", false, "Nguyen Van", "Tam", false, null, null, null, "AQAAAAEAACcQAAAAEGl01yb+jr23DGMcLeWzzY0RYuZ4WOmhp0AvuVJ0QxAtnltqOkTc8jejgaLG9IVqSg==", "096589475135", false, null, false, null }
                 });
 
             migrationBuilder.InsertData(
@@ -320,29 +328,24 @@ namespace WebApi.Data.Migrations
                 columns: new[] { "FieldId", "Address", "CreatedAt", "DeletedAt", "GroupFieldForeinKey", "ImageName", "ImagePath", "IsHot", "Name", "Status", "TopHot", "UserForeignKey" },
                 values: new object[,]
                 {
-                    { 1, "HN", new DateTime(2021, 10, 3, 17, 43, 52, 423, DateTimeKind.Local).AddTicks(7219), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, null, null, true, "A", true, 1, new Guid("76d27679-bf33-43ce-abeb-5c85341cc1b9") },
-                    { 2, "HN", new DateTime(2021, 10, 3, 17, 43, 52, 423, DateTimeKind.Local).AddTicks(8624), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, null, null, true, "B", true, 3, new Guid("76d27679-bf33-43ce-abeb-5c85341cc1b9") },
-                    { 3, "HN", new DateTime(2021, 10, 3, 17, 43, 52, 423, DateTimeKind.Local).AddTicks(8685), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, null, null, true, "C", true, 2, new Guid("76d27679-bf33-43ce-abeb-5c85341cc1b9") },
-                    { 4, "HN", new DateTime(2021, 10, 3, 17, 43, 52, 423, DateTimeKind.Local).AddTicks(8690), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, null, null, true, "A", true, 1, new Guid("66fb69ca-8a82-46bf-b2cf-4101db00cccb") },
-                    { 5, "HN", new DateTime(2021, 10, 3, 17, 43, 52, 423, DateTimeKind.Local).AddTicks(8693), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, null, null, true, "B", true, 2, new Guid("66fb69ca-8a82-46bf-b2cf-4101db00cccb") }
+                    { 1, "HN", new DateTime(2021, 10, 18, 1, 3, 35, 399, DateTimeKind.Local).AddTicks(9531), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, null, null, true, "A", true, 1, new Guid("76d27679-bf33-43ce-abeb-5c85341cc1b9") },
+                    { 2, "HN", new DateTime(2021, 10, 18, 1, 3, 35, 400, DateTimeKind.Local).AddTicks(875), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, null, null, true, "B", true, 3, new Guid("76d27679-bf33-43ce-abeb-5c85341cc1b9") },
+                    { 3, "HN", new DateTime(2021, 10, 18, 1, 3, 35, 400, DateTimeKind.Local).AddTicks(931), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, null, null, true, "C", true, 2, new Guid("76d27679-bf33-43ce-abeb-5c85341cc1b9") },
+                    { 4, "HN", new DateTime(2021, 10, 18, 1, 3, 35, 400, DateTimeKind.Local).AddTicks(935), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, null, null, true, "A", true, 1, new Guid("66fb69ca-8a82-46bf-b2cf-4101db00cccb") },
+                    { 5, "HN", new DateTime(2021, 10, 18, 1, 3, 35, 400, DateTimeKind.Local).AddTicks(938), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, null, null, true, "B", true, 2, new Guid("66fb69ca-8a82-46bf-b2cf-4101db00cccb") }
                 });
 
             migrationBuilder.InsertData(
                 table: "FieldSchedule",
-                columns: new[] { "FieldScheduleID", "FieldForeignKey", "Status", "TimeEnd", "TimeStart" },
+                columns: new[] { "FieldScheduleID", "FieldForeignKey", "Price", "Status", "TimeEnd", "TimeStart" },
                 values: new object[,]
                 {
-                    { 1, 1, true, new DateTime(2021, 4, 10, 23, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 4, 10, 5, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 2, 2, true, new DateTime(2021, 4, 10, 23, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 4, 10, 5, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 3, 3, true, new DateTime(2021, 4, 10, 23, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 4, 10, 5, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 4, 4, true, new DateTime(2021, 4, 10, 23, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 4, 10, 5, 0, 0, 0, DateTimeKind.Unspecified) },
-                    { 5, 5, true, new DateTime(2021, 4, 10, 23, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 4, 10, 5, 0, 0, 0, DateTimeKind.Unspecified) }
+                    { 1, 1, 0m, true, new DateTime(2021, 4, 10, 23, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 4, 10, 5, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, 2, 0m, true, new DateTime(2021, 4, 10, 23, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 4, 10, 5, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 3, 3, 0m, true, new DateTime(2021, 4, 10, 23, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 4, 10, 5, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 4, 4, 0m, true, new DateTime(2021, 4, 10, 23, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 4, 10, 5, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 5, 5, 0m, true, new DateTime(2021, 4, 10, 23, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 4, 10, 5, 0, 0, 0, DateTimeKind.Unspecified) }
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Booking_FieldScheduleForeignKey",
-                table: "Booking",
-                column: "FieldScheduleForeignKey");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Booking_UserForeignKey",
@@ -353,6 +356,16 @@ namespace WebApi.Data.Migrations
                 name: "IX_BookingDetail_BookingForeignKey",
                 table: "BookingDetail",
                 column: "BookingForeignKey");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BookingDetail_FieldForeignKey",
+                table: "BookingDetail",
+                column: "FieldForeignKey");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BookingDetail_FieldScheduleForeignKey",
+                table: "BookingDetail",
+                column: "FieldScheduleForeignKey");
 
             migrationBuilder.CreateIndex(
                 name: "IX_FeedBack_BookingIdForeignKey",
@@ -412,10 +425,10 @@ namespace WebApi.Data.Migrations
                 name: "UserToken");
 
             migrationBuilder.DropTable(
-                name: "Booking");
+                name: "FieldSchedule");
 
             migrationBuilder.DropTable(
-                name: "FieldSchedule");
+                name: "Booking");
 
             migrationBuilder.DropTable(
                 name: "Field");

@@ -22,6 +22,6 @@ namespace WebApi.Data.Entites
         public Guid UserForeignKey { get; set; }
         public User User { get; set; }
         public ICollection<FieldSchedule> FieldSchedules { get; set; }
-
+        public ICollection<BookingDetail> BookingDetails { get; set; }
     }
 }

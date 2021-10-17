@@ -11,8 +11,6 @@ namespace WebApi.Data.Entites
         public decimal OriginPrice { get; set; }
         public decimal TotalPrice { get; set; }
         public bool Status { get; set; }
-        public int FieldScheduleForeignKey { get; set; }
-        public FieldSchedule FieldSchedule { get; set; }
         public Guid UserForeignKey { get; set; }
         public User User { get; set; }
         public ICollection<FeedBack> FeedBacks { get; set; }

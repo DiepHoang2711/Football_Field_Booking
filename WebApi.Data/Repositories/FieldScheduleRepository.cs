@@ -17,8 +17,7 @@ namespace WebApi.Data.Repositories
 
         }
 
-
-        public async Task<List<int>> getSchedule(int id)
+        public async Task<List<int>> GetSchedule(int id)
         {
             List<int> schedule = new List<int>();
 
@@ -29,7 +28,6 @@ namespace WebApi.Data.Repositories
             var start = result.TimeStart.Hour;
             var end = result.TimeEnd.Hour;
 
-            long timeTable = end - start; 
             for (int i = start; i < end; i++)
             {
                 schedule.Add(i);
@@ -37,30 +35,35 @@ namespace WebApi.Data.Repositories
             return schedule;
         }
 
-        public async Task<List<int>> getScheduleAvailable(int id)
+        public async Task<List<int>> GetScheduleAvailable(int id, DateTime bookingDate)
         {
-            List<int> schedule = new List<int>();
+            List<int> schedule = await GetSchedule(id);
+            List<int> tempSchedule = new List<int>();
+            List<int> timeAvailable = new List<int>();
 
-            //var demo = await _context.Fields
-            //    .Include(field => field.FieldSchedules)
-            //    .ThenInclude(fieldSchedule => fieldSchedule.Bookings.Where(x => x.FieldScheduleForeignKey == field.FieldId))
-            //    .ThenInclude(booking => booking.BookingDetails.Where(x => x.BookingForeignKey == booking.BookingId))
-            //    .ToListAsync();
+            DateTime timeStart = bookingDate.AddHours(5);
+            DateTime timeEnd = bookingDate.AddHours(23);
 
-            var result = _context.BookingDetails
-                .Include(bd => bd.Booking)
-                .ThenInclude(b => b.FieldSchedule.FieldForeignKey == id)
-                .FirstOrDefault();
-
-            var start = result.TimeStart.Hour;
-            var end = result.TimeEnd.Hour;
-
-            long timeTable = end - start; // = 17
-            for (int i = start; i < end; i++)
+            var query = from bd in _context.BookingDetails
+                        join b in _context.Bookings on bd.BookingForeignKey equals b.BookingId
+                        join fs in _context.FieldSchedules on bd.FieldScheduleForeignKey equals fs.FieldScheduleID
+                        where bd.FieldForeignKey == id && (bd.TimeStart >= timeStart && bd.TimeStart <= timeEnd)
+                        select new { bd.TimeStart, bd.TimeEnd};
+            var listBooked = query.ToList();
+            if(listBooked.Count == 0)
             {
-                schedule.Add(i);
+                timeAvailable = schedule;
             }
-            return schedule;
+            else
+            {
+                foreach(var result in listBooked)
+                {
+                    tempSchedule.Add(result.TimeStart.Hour);
+                }
+            }
+
+            timeAvailable = schedule.Except(tempSchedule).ToList();
+            return timeAvailable;
         }
     }
 

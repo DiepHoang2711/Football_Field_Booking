@@ -13,6 +13,6 @@ namespace WebApi.Data.Entites
         public decimal Price { get; set; }
         public int FieldForeignKey { get; set; }
         public Field Field { get; set; }
-        public ICollection<Booking> Bookings { get; set; }
+        public ICollection<BookingDetail> BookingDetails { get; set; }
     }
 }
