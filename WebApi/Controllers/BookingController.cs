@@ -10,6 +10,7 @@ using WebApi.Bussiness.DTO;
 using WebApi.Bussiness.IServices;
 using WebApi.Data.Entites;
 using WebApi.Data.Repositories;
+using WebApi.Controllers;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -29,13 +30,24 @@ namespace WebApi.Controllers
         // POST api/<OrderController>
         //[Authorize (Roles = "USER")]
         [HttpPost]
-        public async Task<IActionResult> Checkout(List<CartItemViewModel> listCart, int percentDiscount, Guid userId)
+        public async Task<IActionResult> Checkout(List<CartItemViewModel> listCart, int percentDiscount)
         {
             decimal totalPrice = 0;
             decimal priceDiscount = 0;
             decimal finalPrice = 0;
-
             var booking = new Booking();
+            string id = null;
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            if (identity != null)
+            {
+                IEnumerable<Claim> claims = identity.Claims;
+
+                var userIdClaim = claims
+                    .Where(x => x.Type == ClaimTypes.NameIdentifier)
+                    .FirstOrDefault();
+                id = userIdClaim.Value;
+            }
+            Guid idUser = Guid.Parse(id);
 
             if (listCart != null) { 
                 foreach(CartItemViewModel item in listCart)
@@ -51,7 +63,7 @@ namespace WebApi.Controllers
                     booking.OriginPrice = totalPrice;
                     booking.TotalPrice = finalPrice;
                     booking.Status = true;
-                    booking.UserForeignKey = userId;
+                    booking.UserForeignKey = idUser;
 
                 }
                 else {
@@ -59,7 +71,7 @@ namespace WebApi.Controllers
                     booking.OriginPrice = totalPrice;
                     booking.TotalPrice = totalPrice;
                     booking.Status = true;
-                    booking.UserForeignKey = userId;
+                    booking.UserForeignKey = idUser;
                 }
             }
             await _unitOfWork.Booking.Add(booking);
