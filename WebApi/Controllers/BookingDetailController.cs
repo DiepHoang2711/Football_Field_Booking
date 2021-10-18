@@ -24,7 +24,7 @@ namespace WebApi.Controllers
         }
 
         // POST api/<BookingDetailController>
-        //[Authorize(Roles = "USER")]
+        [Authorize(Roles = "USER")]
         [HttpPost]
         public async Task<IActionResult> AddBookingDetail(List<CartItemViewModel> listCart, int idBooking)
         {

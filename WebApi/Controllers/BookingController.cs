@@ -28,7 +28,7 @@ namespace WebApi.Controllers
         }
 
         // POST api/<OrderController>
-        //[Authorize (Roles = "USER")]
+        [Authorize(Roles = "USER")]
         [HttpPost]
         public async Task<IActionResult> Checkout(List<CartItemViewModel> listCart, int percentDiscount)
         {
