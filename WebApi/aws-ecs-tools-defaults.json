@@ -1,0 +1,9 @@
+
+{
+    "region" : "ap-southeast-1",
+    "profile" : "default",
+    "configuration" : "Release",
+    "image-tag"     : "app:latest",
+    "docker-build-working-dir" : "",
+    "vstoolkit-deployment-mode" : "PushOnly"
+}
