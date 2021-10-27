@@ -51,6 +51,10 @@ namespace WebApi
 
             services.AddControllers();
 
+            services.AddCors(options => options.AddDefaultPolicy(
+                    buider => buider.AllowAnyOrigin()
+            ));
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Swagger BookingField", Version = "v1" });
@@ -125,6 +129,8 @@ namespace WebApi
 
             app.UseAuthentication();
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseAuthorization();
 
