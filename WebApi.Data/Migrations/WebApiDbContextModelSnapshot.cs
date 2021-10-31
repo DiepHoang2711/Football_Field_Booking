@@ -237,7 +237,7 @@ namespace WebApi.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2021, 10, 18, 1, 3, 35, 368, DateTimeKind.Local).AddTicks(1009));
+                        .HasDefaultValue(new DateTime(2021, 10, 31, 15, 32, 54, 124, DateTimeKind.Local).AddTicks(9154));
 
                     b.Property<DateTime>("DeletedAt")
                         .HasColumnType("datetime2");
@@ -267,6 +267,9 @@ namespace WebApi.Data.Migrations
                         .HasColumnType("int")
                         .HasDefaultValue(-1);
 
+                    b.Property<int>("TypeField")
+                        .HasColumnType("int");
+
                     b.Property<Guid>("UserForeignKey")
                         .HasColumnType("uniqueidentifier");
 
@@ -283,65 +286,70 @@ namespace WebApi.Data.Migrations
                         {
                             FieldId = 1,
                             Address = "HN",
-                            CreatedAt = new DateTime(2021, 10, 18, 1, 3, 35, 399, DateTimeKind.Local).AddTicks(9531),
+                            CreatedAt = new DateTime(2021, 10, 31, 15, 32, 54, 162, DateTimeKind.Local).AddTicks(4166),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GroupFieldForeinKey = 1,
                             IsHot = true,
                             Name = "A",
                             Status = true,
                             TopHot = 1,
+                            TypeField = 5,
                             UserForeignKey = new Guid("76d27679-bf33-43ce-abeb-5c85341cc1b9")
                         },
                         new
                         {
                             FieldId = 2,
                             Address = "HN",
-                            CreatedAt = new DateTime(2021, 10, 18, 1, 3, 35, 400, DateTimeKind.Local).AddTicks(875),
+                            CreatedAt = new DateTime(2021, 10, 31, 15, 32, 54, 162, DateTimeKind.Local).AddTicks(6098),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GroupFieldForeinKey = 1,
                             IsHot = true,
                             Name = "B",
                             Status = true,
                             TopHot = 3,
+                            TypeField = 5,
                             UserForeignKey = new Guid("76d27679-bf33-43ce-abeb-5c85341cc1b9")
                         },
                         new
                         {
                             FieldId = 3,
                             Address = "HN",
-                            CreatedAt = new DateTime(2021, 10, 18, 1, 3, 35, 400, DateTimeKind.Local).AddTicks(931),
+                            CreatedAt = new DateTime(2021, 10, 31, 15, 32, 54, 162, DateTimeKind.Local).AddTicks(6171),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GroupFieldForeinKey = 1,
                             IsHot = true,
                             Name = "C",
                             Status = true,
                             TopHot = 2,
+                            TypeField = 7,
                             UserForeignKey = new Guid("76d27679-bf33-43ce-abeb-5c85341cc1b9")
                         },
                         new
                         {
                             FieldId = 4,
                             Address = "HN",
-                            CreatedAt = new DateTime(2021, 10, 18, 1, 3, 35, 400, DateTimeKind.Local).AddTicks(935),
+                            CreatedAt = new DateTime(2021, 10, 31, 15, 32, 54, 162, DateTimeKind.Local).AddTicks(6175),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GroupFieldForeinKey = 2,
                             IsHot = true,
                             Name = "A",
                             Status = true,
                             TopHot = 1,
+                            TypeField = 5,
                             UserForeignKey = new Guid("66fb69ca-8a82-46bf-b2cf-4101db00cccb")
                         },
                         new
                         {
                             FieldId = 5,
                             Address = "HN",
-                            CreatedAt = new DateTime(2021, 10, 18, 1, 3, 35, 400, DateTimeKind.Local).AddTicks(938),
+                            CreatedAt = new DateTime(2021, 10, 31, 15, 32, 54, 162, DateTimeKind.Local).AddTicks(6178),
                             DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GroupFieldForeinKey = 2,
                             IsHot = true,
                             Name = "B",
                             Status = true,
                             TopHot = 2,
+                            TypeField = 11,
                             UserForeignKey = new Guid("66fb69ca-8a82-46bf-b2cf-4101db00cccb")
                         });
                 });
@@ -474,7 +482,7 @@ namespace WebApi.Data.Migrations
                         {
                             GroupFieldId = 1,
                             Address = "HN",
-                            CreatedAt = new DateTime(2021, 10, 18, 1, 3, 35, 379, DateTimeKind.Local).AddTicks(6909),
+                            CreatedAt = new DateTime(2021, 10, 31, 15, 32, 54, 141, DateTimeKind.Local).AddTicks(5037),
                             Description = "Sports facilities are the most valuable asset in the business. has always focused on creating more value for its partners. Our system is built on feedback from sports facilities.",
                             Name = "Hoang",
                             Status = true,
@@ -484,7 +492,7 @@ namespace WebApi.Data.Migrations
                         {
                             GroupFieldId = 2,
                             Address = "HN",
-                            CreatedAt = new DateTime(2021, 10, 18, 1, 3, 35, 379, DateTimeKind.Local).AddTicks(7617),
+                            CreatedAt = new DateTime(2021, 10, 31, 15, 32, 54, 141, DateTimeKind.Local).AddTicks(5741),
                             Description = "Sports facilities are the most valuable asset in the business. has always focused on creating more value for its partners. Our system is built on feedback from sports facilities.",
                             Name = "VanTam",
                             Status = true,
@@ -520,21 +528,21 @@ namespace WebApi.Data.Migrations
                         new
                         {
                             Id = new Guid("ab1052cc-e279-465d-a9df-25d1795ce0f3"),
-                            ConcurrencyStamp = "8bbd62f5-f97d-48e4-855e-164fb5e98bbd",
+                            ConcurrencyStamp = "45e52ec5-a2d6-4871-a556-e71f66d34c71",
                             Description = "Admin is boss",
                             Name = "ADMIN"
                         },
                         new
                         {
                             Id = new Guid("0d854a38-ea51-4f87-8e05-d7d44db368e1"),
-                            ConcurrencyStamp = "5886aeff-c6da-444e-879f-d4d3e5a9d264",
+                            ConcurrencyStamp = "aacf5f89-c00b-4649-a904-2a9c6ce1b3f5",
                             Description = "Owner is manager",
                             Name = "OWNER"
                         },
                         new
                         {
                             Id = new Guid("45a5286c-02e9-4b43-a81f-bb32dceecffd"),
-                            ConcurrencyStamp = "334c163b-7c47-4b5c-b73d-8fc45ee68f2b",
+                            ConcurrencyStamp = "3ec1b20d-8e5f-4fc9-8d30-f6cb0d83520d",
                             Description = "User is user",
                             Name = "USER"
                         });
@@ -607,14 +615,14 @@ namespace WebApi.Data.Migrations
                         {
                             Id = new Guid("76d27679-bf33-43ce-abeb-5c85341cc1b9"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "61cf0856-5fd3-43c4-a2b4-98404164cef9",
+                            ConcurrencyStamp = "1cf4084b-7757-4d98-b48b-d6a26ed72fa9",
                             DoB = new DateTime(1998, 5, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "hoangbd@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Bach Duy",
                             LastName = "Hoang",
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEGzq6K1aCMsLEjfVR7TNrqANKJ0ulwSej2Yv0hA5jmxss5/2bLqSZXqxs3OQ26S4lQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHnhkacaOrH/4ofcySbfvt6wb/vW99L6b4moLyAYlMwrjxpGbvm4wDmz00/v0adYjA==",
                             PhoneNumber = "09356248153",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false
@@ -623,14 +631,14 @@ namespace WebApi.Data.Migrations
                         {
                             Id = new Guid("66fb69ca-8a82-46bf-b2cf-4101db00cccb"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "bc3d29e0-57d1-4673-a6d1-a56d36a2abb5",
+                            ConcurrencyStamp = "31fccde6-5634-4659-aea8-98baa8f306cd",
                             DoB = new DateTime(2000, 8, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "tamnv@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Nguyen Van",
                             LastName = "Tam",
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEGl01yb+jr23DGMcLeWzzY0RYuZ4WOmhp0AvuVJ0QxAtnltqOkTc8jejgaLG9IVqSg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECwwRdMPDmjNH38nqbmGp3GZS6ItjfeQGVlNt6cpwbbQTDCGYkj7lcq6ok8fp8fK5Q==",
                             PhoneNumber = "096589475135",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false
