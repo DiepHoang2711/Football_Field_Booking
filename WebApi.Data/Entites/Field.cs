@@ -10,6 +10,7 @@ namespace WebApi.Data.Entites
         public int FieldId { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
+        public int TypeField { get; set; }
         public string ImagePath { get; set; }
         public string ImageName { get; set; }
         public DateTime CreatedAt { get; set; }

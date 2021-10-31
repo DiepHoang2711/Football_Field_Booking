@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebApi.Data.Migrations
 {
-    public partial class updatedatabase : Migration
+    public partial class initdatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -208,9 +208,10 @@ namespace WebApi.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TypeField = table.Column<int>(type: "int", nullable: false),
                     ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ImageName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2021, 10, 18, 1, 3, 35, 368, DateTimeKind.Local).AddTicks(1009)),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2021, 10, 31, 15, 32, 54, 124, DateTimeKind.Local).AddTicks(9154)),
                     Status = table.Column<bool>(type: "bit", nullable: false),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsHot = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
@@ -300,8 +301,8 @@ namespace WebApi.Data.Migrations
                 columns: new[] { "GroupFieldId", "Address", "CreatedAt", "Description", "ImageName", "ImagePath", "Name", "Status", "UserForeignKey", "UserId" },
                 values: new object[,]
                 {
-                    { 1, "HN", new DateTime(2021, 10, 18, 1, 3, 35, 379, DateTimeKind.Local).AddTicks(6909), "Sports facilities are the most valuable asset in the business. has always focused on creating more value for its partners. Our system is built on feedback from sports facilities.", null, null, "Hoang", true, new Guid("76d27679-bf33-43ce-abeb-5c85341cc1b9"), null },
-                    { 2, "HN", new DateTime(2021, 10, 18, 1, 3, 35, 379, DateTimeKind.Local).AddTicks(7617), "Sports facilities are the most valuable asset in the business. has always focused on creating more value for its partners. Our system is built on feedback from sports facilities.", null, null, "VanTam", true, new Guid("66fb69ca-8a82-46bf-b2cf-4101db00cccb"), null }
+                    { 1, "HN", new DateTime(2021, 10, 31, 15, 32, 54, 141, DateTimeKind.Local).AddTicks(5037), "Sports facilities are the most valuable asset in the business. has always focused on creating more value for its partners. Our system is built on feedback from sports facilities.", null, null, "Hoang", true, new Guid("76d27679-bf33-43ce-abeb-5c85341cc1b9"), null },
+                    { 2, "HN", new DateTime(2021, 10, 31, 15, 32, 54, 141, DateTimeKind.Local).AddTicks(5741), "Sports facilities are the most valuable asset in the business. has always focused on creating more value for its partners. Our system is built on feedback from sports facilities.", null, null, "VanTam", true, new Guid("66fb69ca-8a82-46bf-b2cf-4101db00cccb"), null }
                 });
 
             migrationBuilder.InsertData(
@@ -309,9 +310,9 @@ namespace WebApi.Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Description", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("ab1052cc-e279-465d-a9df-25d1795ce0f3"), "8bbd62f5-f97d-48e4-855e-164fb5e98bbd", "Admin is boss", "ADMIN", null },
-                    { new Guid("0d854a38-ea51-4f87-8e05-d7d44db368e1"), "5886aeff-c6da-444e-879f-d4d3e5a9d264", "Owner is manager", "OWNER", null },
-                    { new Guid("45a5286c-02e9-4b43-a81f-bb32dceecffd"), "334c163b-7c47-4b5c-b73d-8fc45ee68f2b", "User is user", "USER", null }
+                    { new Guid("ab1052cc-e279-465d-a9df-25d1795ce0f3"), "45e52ec5-a2d6-4871-a556-e71f66d34c71", "Admin is boss", "ADMIN", null },
+                    { new Guid("0d854a38-ea51-4f87-8e05-d7d44db368e1"), "aacf5f89-c00b-4649-a904-2a9c6ce1b3f5", "Owner is manager", "OWNER", null },
+                    { new Guid("45a5286c-02e9-4b43-a81f-bb32dceecffd"), "3ec1b20d-8e5f-4fc9-8d30-f6cb0d83520d", "User is user", "USER", null }
                 });
 
             migrationBuilder.InsertData(
@@ -319,20 +320,20 @@ namespace WebApi.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DoB", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("76d27679-bf33-43ce-abeb-5c85341cc1b9"), 0, "61cf0856-5fd3-43c4-a2b4-98404164cef9", new DateTime(1998, 5, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), "hoangbd@gmail.com", false, "Bach Duy", "Hoang", false, null, null, null, "AQAAAAEAACcQAAAAEGzq6K1aCMsLEjfVR7TNrqANKJ0ulwSej2Yv0hA5jmxss5/2bLqSZXqxs3OQ26S4lQ==", "09356248153", false, null, false, null },
-                    { new Guid("66fb69ca-8a82-46bf-b2cf-4101db00cccb"), 0, "bc3d29e0-57d1-4673-a6d1-a56d36a2abb5", new DateTime(2000, 8, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "tamnv@gmail.com", false, "Nguyen Van", "Tam", false, null, null, null, "AQAAAAEAACcQAAAAEGl01yb+jr23DGMcLeWzzY0RYuZ4WOmhp0AvuVJ0QxAtnltqOkTc8jejgaLG9IVqSg==", "096589475135", false, null, false, null }
+                    { new Guid("76d27679-bf33-43ce-abeb-5c85341cc1b9"), 0, "1cf4084b-7757-4d98-b48b-d6a26ed72fa9", new DateTime(1998, 5, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), "hoangbd@gmail.com", false, "Bach Duy", "Hoang", false, null, null, null, "AQAAAAEAACcQAAAAEHnhkacaOrH/4ofcySbfvt6wb/vW99L6b4moLyAYlMwrjxpGbvm4wDmz00/v0adYjA==", "09356248153", false, null, false, null },
+                    { new Guid("66fb69ca-8a82-46bf-b2cf-4101db00cccb"), 0, "31fccde6-5634-4659-aea8-98baa8f306cd", new DateTime(2000, 8, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "tamnv@gmail.com", false, "Nguyen Van", "Tam", false, null, null, null, "AQAAAAEAACcQAAAAECwwRdMPDmjNH38nqbmGp3GZS6ItjfeQGVlNt6cpwbbQTDCGYkj7lcq6ok8fp8fK5Q==", "096589475135", false, null, false, null }
                 });
 
             migrationBuilder.InsertData(
                 table: "Field",
-                columns: new[] { "FieldId", "Address", "CreatedAt", "DeletedAt", "GroupFieldForeinKey", "ImageName", "ImagePath", "IsHot", "Name", "Status", "TopHot", "UserForeignKey" },
+                columns: new[] { "FieldId", "Address", "CreatedAt", "DeletedAt", "GroupFieldForeinKey", "ImageName", "ImagePath", "IsHot", "Name", "Status", "TopHot", "TypeField", "UserForeignKey" },
                 values: new object[,]
                 {
-                    { 1, "HN", new DateTime(2021, 10, 18, 1, 3, 35, 399, DateTimeKind.Local).AddTicks(9531), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, null, null, true, "A", true, 1, new Guid("76d27679-bf33-43ce-abeb-5c85341cc1b9") },
-                    { 2, "HN", new DateTime(2021, 10, 18, 1, 3, 35, 400, DateTimeKind.Local).AddTicks(875), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, null, null, true, "B", true, 3, new Guid("76d27679-bf33-43ce-abeb-5c85341cc1b9") },
-                    { 3, "HN", new DateTime(2021, 10, 18, 1, 3, 35, 400, DateTimeKind.Local).AddTicks(931), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, null, null, true, "C", true, 2, new Guid("76d27679-bf33-43ce-abeb-5c85341cc1b9") },
-                    { 4, "HN", new DateTime(2021, 10, 18, 1, 3, 35, 400, DateTimeKind.Local).AddTicks(935), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, null, null, true, "A", true, 1, new Guid("66fb69ca-8a82-46bf-b2cf-4101db00cccb") },
-                    { 5, "HN", new DateTime(2021, 10, 18, 1, 3, 35, 400, DateTimeKind.Local).AddTicks(938), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, null, null, true, "B", true, 2, new Guid("66fb69ca-8a82-46bf-b2cf-4101db00cccb") }
+                    { 1, "HN", new DateTime(2021, 10, 31, 15, 32, 54, 162, DateTimeKind.Local).AddTicks(4166), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, null, null, true, "A", true, 1, 5, new Guid("76d27679-bf33-43ce-abeb-5c85341cc1b9") },
+                    { 2, "HN", new DateTime(2021, 10, 31, 15, 32, 54, 162, DateTimeKind.Local).AddTicks(6098), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, null, null, true, "B", true, 3, 5, new Guid("76d27679-bf33-43ce-abeb-5c85341cc1b9") },
+                    { 3, "HN", new DateTime(2021, 10, 31, 15, 32, 54, 162, DateTimeKind.Local).AddTicks(6171), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, null, null, true, "C", true, 2, 7, new Guid("76d27679-bf33-43ce-abeb-5c85341cc1b9") },
+                    { 4, "HN", new DateTime(2021, 10, 31, 15, 32, 54, 162, DateTimeKind.Local).AddTicks(6175), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, null, null, true, "A", true, 1, 5, new Guid("66fb69ca-8a82-46bf-b2cf-4101db00cccb") },
+                    { 5, "HN", new DateTime(2021, 10, 31, 15, 32, 54, 162, DateTimeKind.Local).AddTicks(6178), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, null, null, true, "B", true, 2, 11, new Guid("66fb69ca-8a82-46bf-b2cf-4101db00cccb") }
                 });
 
             migrationBuilder.InsertData(
