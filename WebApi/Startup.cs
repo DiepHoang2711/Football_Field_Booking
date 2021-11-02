@@ -32,6 +32,11 @@ namespace WebApi
             services.AddDbContext<WebApiDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("BookingFieldDatabase")));
 
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
+
             //Identity
             services.AddIdentity<User, Role>()
                 .AddEntityFrameworkStores<WebApiDbContext>()

@@ -61,6 +61,12 @@ namespace WebApi.Bussiness.Services
 
         }
 
+        public async Task<User> GetUserInfor(Guid id)
+        {
+            User user = await _userManager.FindByIdAsync(id.ToString());
+            return user;
+        }
+
         public async Task<bool> Register(RegisterRequest request)
         {
             var user = new User()
