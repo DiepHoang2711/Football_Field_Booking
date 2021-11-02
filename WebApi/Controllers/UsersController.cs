@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using WebApi.Bussiness.DTO;
 using WebApi.Bussiness.Services;
+using WebApi.Data.Entites;
 
 namespace WebApi.Controllers
 {
@@ -64,6 +66,26 @@ namespace WebApi.Controllers
                     .Where(x => x.Type == ClaimTypes.NameIdentifier)
                     .FirstOrDefault();
                 return Ok(userIdClaim.Value);
+            }
+            return Unauthorized();
+        }
+
+        [HttpGet("GetUserInfor")]
+        [Authorize]
+        public async Task<IActionResult> GetUserInfor()
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            if (identity != null)
+            {
+                IEnumerable<Claim> claims = identity.Claims;
+
+                var userIdClaim = claims
+                    .Where(x => x.Type == ClaimTypes.NameIdentifier)
+                    .FirstOrDefault();
+
+                User user = await _userService.GetUserInfor(Guid.Parse(userIdClaim.Value));
+
+                return Ok(user);
             }
             return Unauthorized();
         }

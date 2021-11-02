@@ -9,5 +9,9 @@ namespace WebApi.Data.Repositories
 {
     public interface IGroupFieldRepository : IGenericRepository<GroupField>
     {
+        Task<List<GroupField>> GetGroupFieldsByName(string name, int pageIndex = 1, int pageSize = 10);
+        Task<List<GroupField>> GetGroupFieldsByTypeField(int typeField, int pageIndex = 1, int pageSize = 10);
+
+        
     }
 }

@@ -30,10 +30,24 @@ namespace WebApi.Controllers
         }
         // GET: api/<GroupFieldController>
         [HttpGet]
-        [Authorize]
         public async Task<IActionResult> Get()
         {
             var listProduct = await _unitOfWork.GroupField.GetAll();
+            return Ok(listProduct);
+        }
+
+        [HttpGet("Search/Name/{name}")]
+        public async Task<IActionResult> SearchGroupFieldByName(string name="")
+        {
+            var listProduct = await _unitOfWork.GroupField.GetGroupFieldsByName(name, 1, 10);
+            return Ok(listProduct);
+        }
+
+        [HttpGet("Search/TypeField/{typeField}")]
+        public async Task<IActionResult> SearchGroupFieldByName(int typeField)
+        {
+            var listProduct = await _unitOfWork.GroupField.GetGroupFieldsByTypeField(typeField, 1, 10);
+
             return Ok(listProduct);
         }
 
