@@ -16,6 +16,16 @@ namespace WebApi.Data.Repositories
 
         }
 
+        public async Task<List<GroupField>> GetGroupFieldsById(int id)
+        {
+
+            var result = await _context.GroupFields.Include(x => x.Fields)
+                .Where(x => x.GroupFieldId == id)
+                .ToListAsync();
+
+            return result;
+        }
+
         public async Task<List<GroupField>> GetGroupFieldsByName(string name, int pageIndex = 1, int pageSize = 10)
         {
 

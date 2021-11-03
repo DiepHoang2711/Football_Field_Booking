@@ -63,6 +63,17 @@ namespace WebApi.Controllers
             return Ok(product);
         }
 
+        [HttpGet("GroupFieldWithField/{id}")]
+        public async Task<IActionResult> GetGroupWithField(int id)
+        {
+            var product = await _unitOfWork.GroupField.GetGroupFieldsById(id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+            return Ok(product);
+        }
+
         // POST api/<GroupFieldController>
         [HttpPost]
         public async Task<IActionResult> Post([FromForm] GroupFieldCreateRequest  request)
