@@ -12,6 +12,6 @@ namespace WebApi.Data.Repositories
         Task<List<GroupField>> GetGroupFieldsByName(string name, int pageIndex = 1, int pageSize = 10);
         Task<List<GroupField>> GetGroupFieldsByTypeField(int typeField, int pageIndex = 1, int pageSize = 10);
         Task<List<GroupField>> GetGroupFieldsById(int id);
-
+        Task<List<GroupField>> GetAllGroupFields();
     }
 }

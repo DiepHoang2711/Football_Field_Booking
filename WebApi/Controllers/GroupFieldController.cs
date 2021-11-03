@@ -36,6 +36,13 @@ namespace WebApi.Controllers
             return Ok(listProduct);
         }
 
+        [HttpGet("GroupFieldWithField")]
+        public async Task<IActionResult> GetGroupFieldWithFields()
+        {
+            var listProduct = await _unitOfWork.GroupField.GetAllGroupFields();
+            return Ok(listProduct);
+        }
+
         [HttpGet("Search/Name/{name}")]
         public async Task<IActionResult> SearchGroupFieldByName(string name="")
         {
