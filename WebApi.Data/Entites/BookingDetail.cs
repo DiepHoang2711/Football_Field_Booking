@@ -14,6 +14,7 @@ namespace WebApi.Data.Entites
         public int BookingForeignKey { get; set; }
         public int FieldScheduleForeignKey { get; set; }
         public int FieldForeignKey { get; set; }
+        public ICollection<FeedBack> Feedbacks { get; set; }
         public Field Field { get; set; }
         public FieldSchedule FieldSchedule { get; set; }
         public Booking Booking { get; set; }

@@ -17,11 +17,9 @@ namespace WebApi.Data.Configuration
 
             builder.HasOne(x => x.User).WithMany(x => x.FeedBacks)
                 .HasForeignKey(x => x.UserForeignKey).IsRequired(false);
-                
 
-
-            builder.HasOne(x => x.Booking).WithMany(x => x.FeedBacks)
-                .HasForeignKey(x => x.BookingForeignKey).IsRequired(false);
+            builder.HasOne(x => x.BookingDetail).WithMany(x => x.Feedbacks)
+                .HasForeignKey(x => x.BookingDetailForeignKey).IsRequired(false);
                 
         }
     }
