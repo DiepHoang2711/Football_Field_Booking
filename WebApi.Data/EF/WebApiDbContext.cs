@@ -45,9 +45,9 @@ namespace WebApi.Data.EF
                 .HasKey(x => x.UserId);
 
             //Seeding Data 
-            modelBuilder.Seed();
+            //modelBuilder.Seed();
 
-            //base.OnModelCreating(modelBuilder);
+            base.OnModelCreating(modelBuilder);
         }
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<BookingDetail> BookingDetails { get; set; }

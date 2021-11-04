@@ -37,7 +37,9 @@ namespace WebApi.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("RoleClaim");
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
@@ -58,27 +60,30 @@ namespace WebApi.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserClaim");
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
-                    b.Property<Guid>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("UserId");
+                    b.HasKey("LoginProvider", "ProviderKey");
 
-                    b.ToTable("UserLogin");
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
@@ -91,27 +96,28 @@ namespace WebApi.Data.Migrations
 
                     b.HasKey("UserId", "RoleId");
 
-                    b.ToTable("UserRole");
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
                     b.Property<Guid>("UserId")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("UserId");
+                    b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("UserToken");
+                    b.ToTable("AspNetUserTokens");
                 });
 
             modelBuilder.Entity("WebApi.Data.Entites.Booking", b =>
@@ -254,7 +260,7 @@ namespace WebApi.Data.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BookingForeignKey")
+                    b.Property<int>("BookingDetailForeignKey")
                         .HasColumnType("int");
 
                     b.Property<string>("Comment")
@@ -274,7 +280,7 @@ namespace WebApi.Data.Migrations
 
                     b.HasKey("FeedBackId");
 
-                    b.HasIndex("BookingForeignKey");
+                    b.HasIndex("BookingDetailForeignKey");
 
                     b.HasIndex("UserForeignKey");
 
@@ -296,7 +302,7 @@ namespace WebApi.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2021, 11, 4, 15, 45, 47, 969, DateTimeKind.Local).AddTicks(7220));
+                        .HasDefaultValue(new DateTime(2021, 11, 4, 20, 41, 13, 665, DateTimeKind.Local).AddTicks(2467));
 
                     b.Property<DateTime>("DeletedAt")
                         .HasColumnType("datetime2");
@@ -339,78 +345,6 @@ namespace WebApi.Data.Migrations
                     b.HasIndex("UserForeignKey");
 
                     b.ToTable("Field");
-
-                    b.HasData(
-                        new
-                        {
-                            FieldId = 1,
-                            Address = "HN",
-                            CreatedAt = new DateTime(2021, 11, 4, 15, 45, 48, 19, DateTimeKind.Local).AddTicks(946),
-                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GroupFieldForeinKey = 1,
-                            IsHot = true,
-                            Name = "A",
-                            Status = true,
-                            TopHot = 1,
-                            TypeField = 5,
-                            UserForeignKey = new Guid("76d27679-bf33-43ce-abeb-5c85341cc1b9")
-                        },
-                        new
-                        {
-                            FieldId = 2,
-                            Address = "HN",
-                            CreatedAt = new DateTime(2021, 11, 4, 15, 45, 48, 19, DateTimeKind.Local).AddTicks(2417),
-                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GroupFieldForeinKey = 1,
-                            IsHot = true,
-                            Name = "B",
-                            Status = true,
-                            TopHot = 3,
-                            TypeField = 5,
-                            UserForeignKey = new Guid("76d27679-bf33-43ce-abeb-5c85341cc1b9")
-                        },
-                        new
-                        {
-                            FieldId = 3,
-                            Address = "HN",
-                            CreatedAt = new DateTime(2021, 11, 4, 15, 45, 48, 19, DateTimeKind.Local).AddTicks(2482),
-                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GroupFieldForeinKey = 1,
-                            IsHot = true,
-                            Name = "C",
-                            Status = true,
-                            TopHot = 2,
-                            TypeField = 7,
-                            UserForeignKey = new Guid("76d27679-bf33-43ce-abeb-5c85341cc1b9")
-                        },
-                        new
-                        {
-                            FieldId = 4,
-                            Address = "HN",
-                            CreatedAt = new DateTime(2021, 11, 4, 15, 45, 48, 19, DateTimeKind.Local).AddTicks(2488),
-                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GroupFieldForeinKey = 2,
-                            IsHot = true,
-                            Name = "A",
-                            Status = true,
-                            TopHot = 1,
-                            TypeField = 5,
-                            UserForeignKey = new Guid("66fb69ca-8a82-46bf-b2cf-4101db00cccb")
-                        },
-                        new
-                        {
-                            FieldId = 5,
-                            Address = "HN",
-                            CreatedAt = new DateTime(2021, 11, 4, 15, 45, 48, 19, DateTimeKind.Local).AddTicks(2493),
-                            DeletedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            GroupFieldForeinKey = 2,
-                            IsHot = true,
-                            Name = "B",
-                            Status = true,
-                            TopHot = 2,
-                            TypeField = 11,
-                            UserForeignKey = new Guid("66fb69ca-8a82-46bf-b2cf-4101db00cccb")
-                        });
                 });
 
             modelBuilder.Entity("WebApi.Data.Entites.FieldSchedule", b =>
@@ -445,58 +379,6 @@ namespace WebApi.Data.Migrations
                     b.HasIndex("FieldForeignKey");
 
                     b.ToTable("FieldSchedule");
-
-                    b.HasData(
-                        new
-                        {
-                            FieldScheduleID = 1,
-                            FieldForeignKey = 1,
-                            OriginPrice = 0m,
-                            Price = 0m,
-                            Status = true,
-                            TimeEnd = new DateTime(2021, 4, 10, 23, 0, 0, 0, DateTimeKind.Unspecified),
-                            TimeStart = new DateTime(2021, 4, 10, 5, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            FieldScheduleID = 2,
-                            FieldForeignKey = 2,
-                            OriginPrice = 0m,
-                            Price = 0m,
-                            Status = true,
-                            TimeEnd = new DateTime(2021, 4, 10, 23, 0, 0, 0, DateTimeKind.Unspecified),
-                            TimeStart = new DateTime(2021, 4, 10, 5, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            FieldScheduleID = 3,
-                            FieldForeignKey = 3,
-                            OriginPrice = 0m,
-                            Price = 0m,
-                            Status = true,
-                            TimeEnd = new DateTime(2021, 4, 10, 23, 0, 0, 0, DateTimeKind.Unspecified),
-                            TimeStart = new DateTime(2021, 4, 10, 5, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            FieldScheduleID = 4,
-                            FieldForeignKey = 4,
-                            OriginPrice = 0m,
-                            Price = 0m,
-                            Status = true,
-                            TimeEnd = new DateTime(2021, 4, 10, 23, 0, 0, 0, DateTimeKind.Unspecified),
-                            TimeStart = new DateTime(2021, 4, 10, 5, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            FieldScheduleID = 5,
-                            FieldForeignKey = 5,
-                            OriginPrice = 0m,
-                            Price = 0m,
-                            Status = true,
-                            TimeEnd = new DateTime(2021, 4, 10, 23, 0, 0, 0, DateTimeKind.Unspecified),
-                            TimeStart = new DateTime(2021, 4, 10, 5, 0, 0, 0, DateTimeKind.Unspecified)
-                        });
                 });
 
             modelBuilder.Entity("WebApi.Data.Entites.GroupField", b =>
@@ -543,28 +425,6 @@ namespace WebApi.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("GroupField");
-
-                    b.HasData(
-                        new
-                        {
-                            GroupFieldId = 1,
-                            Address = "HN",
-                            CreatedAt = new DateTime(2021, 11, 4, 15, 45, 47, 992, DateTimeKind.Local).AddTicks(7382),
-                            Description = "Sports facilities are the most valuable asset in the business. has always focused on creating more value for its partners. Our system is built on feedback from sports facilities.",
-                            Name = "Hoang",
-                            Status = true,
-                            UserForeignKey = new Guid("76d27679-bf33-43ce-abeb-5c85341cc1b9")
-                        },
-                        new
-                        {
-                            GroupFieldId = 2,
-                            Address = "HN",
-                            CreatedAt = new DateTime(2021, 11, 4, 15, 45, 47, 992, DateTimeKind.Local).AddTicks(8133),
-                            Description = "Sports facilities are the most valuable asset in the business. has always focused on creating more value for its partners. Our system is built on feedback from sports facilities.",
-                            Name = "VanTam",
-                            Status = true,
-                            UserForeignKey = new Guid("66fb69ca-8a82-46bf-b2cf-4101db00cccb")
-                        });
                 });
 
             modelBuilder.Entity("WebApi.Data.Entites.Role", b =>
@@ -575,6 +435,7 @@ namespace WebApi.Data.Migrations
                         .HasDefaultValueSql("NEWID()");
 
                     b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
@@ -582,37 +443,21 @@ namespace WebApi.Data.Migrations
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("NormalizedName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Role");
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
 
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("ab1052cc-e279-465d-a9df-25d1795ce0f3"),
-                            ConcurrencyStamp = "d2fae6fb-8677-4184-ad14-ec7ea9369169",
-                            Description = "Admin is boss",
-                            Name = "ADMIN"
-                        },
-                        new
-                        {
-                            Id = new Guid("0d854a38-ea51-4f87-8e05-d7d44db368e1"),
-                            ConcurrencyStamp = "d8046684-5709-45c3-9439-045c4c3855e0",
-                            Description = "Owner is manager",
-                            Name = "OWNER"
-                        },
-                        new
-                        {
-                            Id = new Guid("45a5286c-02e9-4b43-a81f-bb32dceecffd"),
-                            ConcurrencyStamp = "08758a2d-a3b1-4e65-afd0-e34475de1cba",
-                            Description = "User is user",
-                            Name = "USER"
-                        });
+                    b.ToTable("AspNetRoles");
                 });
 
             modelBuilder.Entity("WebApi.Data.Entites.User", b =>
@@ -626,13 +471,15 @@ namespace WebApi.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DoB")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
@@ -650,10 +497,12 @@ namespace WebApi.Data.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
@@ -671,45 +520,71 @@ namespace WebApi.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
 
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("76d27679-bf33-43ce-abeb-5c85341cc1b9"),
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "2d3fb1a2-9e3d-4d50-9fa9-6c92038748d9",
-                            DoB = new DateTime(1998, 5, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "hoangbd@gmail.com",
-                            EmailConfirmed = false,
-                            FirstName = "Bach Duy",
-                            LastName = "Hoang",
-                            LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEHCKGg5WGGGhSzVWCQXjCQho2x0b7qpNyrAilKN6AP0WbpMbieOmfksGW1jWZ4h7KQ==",
-                            PhoneNumber = "09356248153",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false
-                        },
-                        new
-                        {
-                            Id = new Guid("66fb69ca-8a82-46bf-b2cf-4101db00cccb"),
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "42d8369d-8c8c-45f9-9f15-17f73698a4dc",
-                            DoB = new DateTime(2000, 8, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "tamnv@gmail.com",
-                            EmailConfirmed = false,
-                            FirstName = "Nguyen Van",
-                            LastName = "Tam",
-                            LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEKRK+JBXbW5dor3flvJkXGDpGP8OqOVnlBPPpMAWYBd8bAaWL70cd2V8jMPq8idLqQ==",
-                            PhoneNumber = "096589475135",
-                            PhoneNumberConfirmed = false,
-                            TwoFactorEnabled = false
-                        });
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
+                {
+                    b.HasOne("WebApi.Data.Entites.Role", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
+                {
+                    b.HasOne("WebApi.Data.Entites.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
+                {
+                    b.HasOne("WebApi.Data.Entites.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
+                {
+                    b.HasOne("WebApi.Data.Entites.Role", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebApi.Data.Entites.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
+                {
+                    b.HasOne("WebApi.Data.Entites.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("WebApi.Data.Entites.Booking", b =>
@@ -759,15 +634,15 @@ namespace WebApi.Data.Migrations
 
             modelBuilder.Entity("WebApi.Data.Entites.FeedBack", b =>
                 {
-                    b.HasOne("WebApi.Data.Entites.Booking", "Booking")
-                        .WithMany("FeedBacks")
-                        .HasForeignKey("BookingForeignKey");
+                    b.HasOne("WebApi.Data.Entites.BookingDetail", "BookingDetail")
+                        .WithMany("Feedbacks")
+                        .HasForeignKey("BookingDetailForeignKey");
 
                     b.HasOne("WebApi.Data.Entites.User", "User")
                         .WithMany("FeedBacks")
                         .HasForeignKey("UserForeignKey");
 
-                    b.Navigation("Booking");
+                    b.Navigation("BookingDetail");
 
                     b.Navigation("User");
                 });
@@ -816,8 +691,11 @@ namespace WebApi.Data.Migrations
                     b.Navigation("BookingDetails");
 
                     b.Navigation("BookingDiscount");
+                });
 
-                    b.Navigation("FeedBacks");
+            modelBuilder.Entity("WebApi.Data.Entites.BookingDetail", b =>
+                {
+                    b.Navigation("Feedbacks");
                 });
 
             modelBuilder.Entity("WebApi.Data.Entites.Discount", b =>
