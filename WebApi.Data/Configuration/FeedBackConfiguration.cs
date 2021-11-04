@@ -16,12 +16,12 @@ namespace WebApi.Data.Configuration
             builder.Property(x => x.FeedBackId).UseIdentityColumn();
 
             builder.HasOne(x => x.User).WithMany(x => x.FeedBacks)
-                .HasForeignKey(x => x.UserIdForeignKey).IsRequired(false);
+                .HasForeignKey(x => x.UserForeignKey).IsRequired(false);
                 
 
 
             builder.HasOne(x => x.Booking).WithMany(x => x.FeedBacks)
-                .HasForeignKey(x => x.BookingIdForeignKey).IsRequired(false);
+                .HasForeignKey(x => x.BookingForeignKey).IsRequired(false);
                 
         }
     }

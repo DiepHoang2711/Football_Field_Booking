@@ -13,6 +13,7 @@ namespace WebApi.Data.Entites
         public bool Status { get; set; }
         public Guid UserForeignKey { get; set; }
         public User User { get; set; }
+        public ICollection<BookingDiscount> BookingDiscount { get; set; }
         public ICollection<FeedBack> FeedBacks { get; set; }
         public ICollection<BookingDetail> BookingDetails { get; set; }
     }

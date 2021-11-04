@@ -11,9 +11,9 @@ namespace WebApi.Data.Entites
         public DateTime CreatedAt { get; set; }
         public string Comment { get; set; }
         public bool Status { get; set; }
-        public int BookingIdForeignKey { get; set; }
+        public int BookingForeignKey { get; set; }
         public Booking Booking { get; set; }
-        public Guid UserIdForeignKey { get; set; }
+        public Guid UserForeignKey { get; set; }
         public User User { get; set; }
     }
 }
