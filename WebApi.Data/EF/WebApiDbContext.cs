@@ -26,6 +26,8 @@ namespace WebApi.Data.EF
             modelBuilder.ApplyConfiguration(new FieldConfiguration());
             modelBuilder.ApplyConfiguration(new FieldScheduleConfiguration());
             modelBuilder.ApplyConfiguration(new GroupFieldConfiguration());
+            modelBuilder.ApplyConfiguration(new DiscountConfiguration());
+            modelBuilder.ApplyConfiguration(new BookingDiscountConfiguration());
 
             //Identity
             modelBuilder.ApplyConfiguration(new UserConfiguration());
@@ -53,5 +55,7 @@ namespace WebApi.Data.EF
         public DbSet<GroupField> GroupFields { get; set; }
         public DbSet<Field> Fields { get; set; }
         public DbSet<FieldSchedule> FieldSchedules { get; set; }
+        public DbSet<Discount> Discounts { get; set; }
+        public DbSet<BookingDiscount> BookingDiscounts { get; set; }
     }
 }
