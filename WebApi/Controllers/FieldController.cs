@@ -30,7 +30,7 @@ namespace WebApi.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var listProduct = await _unitOfWork.Field.GetAll();
+            var listProduct = await _unitOfWork.Field.GetListFieldsWithSchedule();
             return Ok(listProduct);
         }
 

@@ -46,12 +46,12 @@ namespace WebApi.Controllers
         [HttpGet("Search/Name/{name}")]
         public async Task<IActionResult> SearchGroupFieldByName(string name="")
         {
-            var listProduct = await _unitOfWork.GroupField.GetGroupFieldsByName(name, 1, 10);
+            var listProduct = await _unitOfWork.GroupField.GetGroupFieldsByName(name);
             return Ok(listProduct);
         }
 
         [HttpGet("Search/TypeField/{typeField}")]
-        public async Task<IActionResult> SearchGroupFieldByName(int typeField)
+        public async Task<IActionResult> SearchGroupFieldByTypeField(int typeField)
         {
             var listProduct = await _unitOfWork.GroupField.GetGroupFieldsByTypeField(typeField, 1, 10);
 

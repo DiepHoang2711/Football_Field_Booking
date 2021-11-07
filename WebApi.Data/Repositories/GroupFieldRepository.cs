@@ -19,8 +19,10 @@ namespace WebApi.Data.Repositories
         public async Task<List<GroupField>> GetGroupFieldsById(int id)
         {
 
-            var result = await _context.GroupFields.Include(x => x.Fields)
+            var result = await _context.GroupFields
                 .Where(x => x.GroupFieldId == id)
+                .Include(x => x.Fields)
+                .ThenInclude(x => x.FieldSchedules)
                 .ToListAsync();
 
             return result;
@@ -28,20 +30,18 @@ namespace WebApi.Data.Repositories
 
         public async Task<List<GroupField>> GetAllGroupFields()
         {
-
             var result = await _context.GroupFields.Include(x => x.Fields)
+                .ThenInclude(x => x.FieldSchedules)
                 .ToListAsync();
 
             return result;
         }
 
-        
-
-        public async Task<List<GroupField>> GetGroupFieldsByName(string name, int pageIndex = 1, int pageSize = 10)
+        public async Task<List<GroupField>> GetGroupFieldsByName(string name)
         {
-
             var result = await _context.GroupFields.OrderBy(x => x.Name)
-                .Where(x => x.Name.Contains(name)).Skip((pageIndex - 1) * pageSize).Take(pageSize)
+                .Where(x => x.Name.Contains(name)).Include(x => x.Fields)
+                .ThenInclude(x => x.FieldSchedules)
                 .ToListAsync();
 
             return result;
@@ -50,6 +50,7 @@ namespace WebApi.Data.Repositories
         public async Task<List<GroupField>> GetGroupFieldsByTypeField(int typeField, int pageIndex = 1, int pageSize = 10)
         {
             var result = await _context.GroupFields.Include(x => x.Fields.Where(x => x.TypeField == typeField))
+                .ThenInclude(x => x.FieldSchedules)
                 .Skip((pageIndex - 1) * pageSize).Take(pageSize)
                 .ToListAsync();
             //List<GroupField> listGroupField = new List<GroupField>();

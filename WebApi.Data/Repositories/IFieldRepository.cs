@@ -9,6 +9,7 @@ namespace WebApi.Data.Repositories
 {
     public interface IFieldRepository : IGenericRepository<Field>
     {
+        Task<List<Field>> GetListFieldsWithSchedule();
 
     }
 }
