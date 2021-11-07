@@ -18,7 +18,6 @@ namespace WebApi.Data.Configuration
             builder.Property(x => x.IsHot).HasDefaultValue(false);
             builder.Property(x => x.CreatedAt).HasDefaultValue(DateTime.Now);
 
-
             builder.HasOne(x => x.GroupField).WithMany(x => x.Fields)
                 .HasForeignKey(x => x.GroupFieldForeinKey);
             builder.HasOne(x => x.User).WithMany(x => x.Fields)
