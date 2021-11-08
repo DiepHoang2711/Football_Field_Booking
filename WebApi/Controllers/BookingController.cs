@@ -27,6 +27,18 @@ namespace WebApi.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        [HttpGet("{idUser}")]
+        public async Task<IActionResult> GetHistory(Guid idUser)
+        {
+            List<Booking> list = await _unitOfWork.Booking.GetHistory(idUser);
+            if(list != null)
+            {
+                return Ok(list);
+            }
+            return BadRequest();
+        }
+
+
         // POST api/<OrderController>
         [Authorize(Roles = "USER")]
         [HttpPost]
