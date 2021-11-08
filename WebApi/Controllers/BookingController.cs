@@ -40,8 +40,7 @@ namespace WebApi.Controllers
 
 
         // POST api/<OrderController>
-        [Authorize(Roles = "USER")]
-        [HttpPost]
+        [HttpPost("authenticate")]
         public async Task<IActionResult> Checkout(List<CartItemViewModel> listCart, int percentDiscount)
         {
             decimal totalPrice = 0;
