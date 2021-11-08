@@ -21,9 +21,9 @@ namespace WebApi.Data.Repositories
         {
             List<int> schedule = new List<int>();
 
-            var result = _context.FieldSchedules
+            var result = await _context.FieldSchedules
                 .Where(x => x.FieldForeignKey == id)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
 
             var start = result.TimeStart.Hour;
             var end = result.TimeEnd.Hour;
@@ -64,6 +64,17 @@ namespace WebApi.Data.Repositories
 
             timeAvailable = schedule.Except(tempSchedule).ToList();
             return timeAvailable;
+        }
+
+        public async Task<int> GetFieldScheduleIdByFieldId(int id)
+        {
+
+            var result = await _context.FieldSchedules
+                .Where(x => x.FieldForeignKey == id)
+                .FirstOrDefaultAsync();
+
+            var idSchedule = result.FieldScheduleID;
+            return idSchedule;
         }
     }
 

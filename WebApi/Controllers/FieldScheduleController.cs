@@ -40,6 +40,12 @@ namespace WebApi.Controllers
             var listProduct = await _unitOfWork.FieldSchedule.GetAll();
             return Ok(listProduct);
         }
+        [HttpGet("field/{id}")]
+        public async Task<IActionResult> GetSchedule(int id)
+        {
+            var listProduct = await _unitOfWork.FieldSchedule.GetFieldScheduleIdByFieldId(id);
+            return Ok(listProduct);
+        }
 
         // GET api/<FieldScheduleController>/5
         [HttpGet("{id}")]

@@ -11,6 +11,8 @@ namespace WebApi.Data.Repositories
         Task<List<int>> GetScheduleAvailable(int idField, DateTime bookingDate);
 
         Task<List<int>> GetSchedule(int id);
+
+        Task<int> GetFieldScheduleIdByFieldId(int id);
     }
 
 }

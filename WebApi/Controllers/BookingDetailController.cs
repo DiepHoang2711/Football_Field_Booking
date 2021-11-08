@@ -39,7 +39,7 @@ namespace WebApi.Controllers
                     bd.Price = item.Price;
                     bd.Status = true;
                     bd.BookingForeignKey = idBooking;
-                    bd.FieldScheduleForeignKey = item.fieldScheduleId;
+                    bd.FieldScheduleForeignKey = await _unitOfWork.FieldSchedule.GetFieldScheduleIdByFieldId(item.fieldScheduleId);
                     bd.FieldForeignKey = item.FieldForeignKey;
                     await _unitOfWork.BookingDetail.Add(bd);
                     status = _unitOfWork.Complete();
