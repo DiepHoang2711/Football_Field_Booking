@@ -27,21 +27,9 @@ namespace WebApi.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        [HttpGet("{idUser}")]
-        public async Task<IActionResult> GetHistory(Guid idUser)
-        {
-            List<Booking> list = await _unitOfWork.Booking.GetHistory(idUser);
-            if(list != null)
-            {
-                return Ok(list);
-            }
-            return BadRequest();
-        }
-
-
         // POST api/<OrderController>
-        [HttpPost("authenticate")]
-        public async Task<IActionResult> Checkout( BookingRequest bookingRequest)
+        [HttpPost("checkout/booking")]
+        public async Task<IActionResult> Checkout(BookingRequest bookingRequest)
         {
             List<CartItemViewModel> listCart = bookingRequest.ListCart;
             int percentDiscount = bookingRequest.Discount;
@@ -62,12 +50,13 @@ namespace WebApi.Controllers
             }
             Guid idUser = Guid.Parse(id);
 
-            if (listCart != null) { 
-                foreach(CartItemViewModel item in listCart)
+            if (listCart != null)
+            {
+                foreach (CartItemViewModel item in listCart)
                 {
                     totalPrice = totalPrice + item.Price;
                 }
-                if(percentDiscount != 0)
+                if (percentDiscount != 0)
                 {
                     priceDiscount = (totalPrice * percentDiscount) / 100;
                     finalPrice = totalPrice - priceDiscount;
@@ -79,7 +68,8 @@ namespace WebApi.Controllers
                     booking.UserForeignKey = idUser;
 
                 }
-                else {
+                else
+                {
                     booking.CreatedAt = DateTime.Now;
                     booking.OriginPrice = totalPrice;
                     booking.TotalPrice = totalPrice;
@@ -95,6 +85,20 @@ namespace WebApi.Controllers
             }
             return BadRequest();
         }
+
+        [HttpGet("{idUser}")]
+        public async Task<IActionResult> GetHistory(Guid idUser)
+        {
+            List<Booking> list = await _unitOfWork.Booking.GetHistory(idUser);
+            if(list != null)
+            {
+                return Ok(list);
+            }
+            return BadRequest();
+        }
+
+
+
 
     }
 }
