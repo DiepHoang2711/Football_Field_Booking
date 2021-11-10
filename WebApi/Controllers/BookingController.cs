@@ -78,10 +78,10 @@ namespace WebApi.Controllers
                 }
             }
             await _unitOfWork.Booking.Add(booking);
-            int status = _unitOfWork.Complete();
+            int status =  _unitOfWork.Complete();
             if (status > 0)
             {
-                return Ok();
+                return Ok(booking.BookingId);
             }
             return BadRequest();
         }
