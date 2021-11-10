@@ -32,7 +32,7 @@ namespace WebApi.Controllers
         public async Task<IActionResult> Checkout(BookingRequest bookingRequest)
         {
             List<CartItemViewModel> listCart = bookingRequest.ListCart;
-            int percentDiscount = bookingRequest.Discount;
+            int percentDiscount = 0;
             decimal totalPrice = 0;
             decimal priceDiscount = 0;
             decimal finalPrice = 0;
