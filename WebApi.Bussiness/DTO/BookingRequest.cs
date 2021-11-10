@@ -6,6 +6,6 @@ namespace WebApi.Bussiness.DTO
 {
     public class BookingRequest
     {
-        public List<CartItemViewModel> ListCart { get; set; }
+        public ICollection<CartItemViewModel> ListCart { get; set; }
     }
 }

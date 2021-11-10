@@ -27,7 +27,7 @@ namespace WebApi.Controllers
         [HttpPost("authenticate")]
         public async Task<IActionResult> AddBookingDetail(BookingDetailRequest bookingRequest)
         {
-            List<CartItemViewModel> listCart = bookingRequest.ListCart;
+            List<CartItemViewModel> listCart = (List<CartItemViewModel>)bookingRequest.ListCart;
             int idBooking = bookingRequest.BookingId;
             int status = 0;
             if(idBooking != 0)

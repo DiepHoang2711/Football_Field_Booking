@@ -31,7 +31,7 @@ namespace WebApi.Controllers
         [HttpPost("checkout/booking")]
         public async Task<IActionResult> Checkout(BookingRequest bookingRequest)
         {
-            List<CartItemViewModel> listCart = bookingRequest.ListCart;
+            List<CartItemViewModel> listCart = (List<CartItemViewModel>)bookingRequest.ListCart;
             int percentDiscount = 0;
             decimal totalPrice = 0;
             decimal priceDiscount = 0;
