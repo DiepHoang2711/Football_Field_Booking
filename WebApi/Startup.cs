@@ -37,6 +37,9 @@ namespace WebApi
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
 
+            services.AddMvc()
+                .AddNewtonsoftJson();
+
             //Identity
             services.AddIdentity<User, Role>()
                 .AddEntityFrameworkStores<WebApiDbContext>()
