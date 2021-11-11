@@ -50,7 +50,7 @@ namespace WebApi.Controllers
             {
                 return BadRequest("Register is not successful");
             }
-            return Ok("Successs");
+            return Ok();
         }
 
         [HttpGet("userId")]
